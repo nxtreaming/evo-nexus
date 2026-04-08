@@ -116,9 +116,10 @@ def run_routine(routine_id):
 
 
 TELEGRAM_LOG = f"{WORKSPACE_STR}/ADWs/logs/telegram.log"
+SCHEDULER_LOG = f"{WORKSPACE_STR}/ADWs/logs/scheduler.log"
 
 START_CMDS = {
-    "scheduler": f"cd {WORKSPACE_STR} && nohup uv run python scheduler.py > /dev/null 2>&1 &",
+    "scheduler": f"cd {WORKSPACE_STR} && nohup uv run python -u scheduler.py >> {SCHEDULER_LOG} 2>&1 &",
     "telegram": f"cd {WORKSPACE_STR} && screen -dmS telegram -L -Logfile {TELEGRAM_LOG} claude --channels plugin:telegram@claude-plugins-official --dangerously-skip-permissions",
 }
 
@@ -187,42 +188,36 @@ def service_logs(service_id):
         return jsonify({"lines": ["Telegram bot is not running. Click Start to launch it."]})
 
     elif service_id == "scheduler":
-        # Read execution logs from JSONL files (real scheduler activity)
-        import json as _json
-        from datetime import date, timedelta
         from routes._helpers import safe_read
-        logs_dir = WORKSPACE / "ADWs" / "logs"
 
-        lines = []
-        if logs_dir.is_dir():
-            # Read last 3 days of JSONL logs
-            today = date.today()
-            for offset in range(3):
-                d = today - timedelta(days=offset)
-                jsonl_file = logs_dir / f"{d.isoformat()}.jsonl"
-                if jsonl_file.is_file():
-                    content = safe_read(jsonl_file)
-                    if content:
-                        for raw_line in content.strip().splitlines():
-                            try:
-                                entry = _json.loads(raw_line)
-                                ts = entry.get("timestamp", "")[:19].replace("T", " ")
-                                name = entry.get("run", "?")
-                                rc = entry.get("returncode", -1)
-                                dur = entry.get("duration_seconds", 0)
-                                cost = entry.get("cost_usd", 0)
-                                status = "✓" if rc == 0 else "✗"
-                                lines.append(f"{ts}  {status}  {name:<25} {dur:>6.1f}s  ${cost:.4f}")
-                            except (_json.JSONDecodeError, KeyError):
-                                continue
+        # Read real scheduler process output
+        log_path = WORKSPACE / "ADWs" / "logs" / "scheduler.log"
+        content = safe_read(log_path)
+        if content:
+            import re
+            # Clean ANSI escape codes and control chars (Rich output)
+            clean = re.sub(r'\x1b\[[0-9;]*[a-zA-Z]', '', content)
+            clean = re.sub(r'\x1b\][^\x07]*\x07', '', clean)  # OSC sequences
+            clean = re.sub(r'[\x00-\x08\x0b\x0c\x0e-\x1f]', '', clean)  # control chars
+            lines = [l for l in clean.split('\n') if l.strip()]
+            if lines:
+                return jsonify({"lines": lines[-200:]})
 
-        if lines:
-            # Header
-            header = f"{'Timestamp':<20}  {'':>1}  {'Routine':<25} {'Duration':>8}  {'Cost':>8}"
-            separator = "-" * len(header)
-            return jsonify({"lines": [header, separator] + lines[-100:]})
+        # Check if running but no log yet
+        try:
+            result = subprocess.run("ps aux | grep '[s]cheduler.py'", shell=True, capture_output=True, text=True, timeout=3)
+            if result.returncode == 0 and result.stdout.strip():
+                return jsonify({"lines": [
+                    "Scheduler is running.",
+                    "Log file will populate as routines execute.",
+                    "",
+                    "If started before this update, restart with Stop → Start",
+                    "to enable log capture.",
+                ]})
+        except Exception:
+            pass
 
-        return jsonify({"lines": ["No scheduler execution logs yet.", "", "Logs appear here after routines run."]})
+        return jsonify({"lines": ["Scheduler is not running. Click Start to launch it."]})
 
     # Docker container logs
     if service_id.startswith("docker-"):
