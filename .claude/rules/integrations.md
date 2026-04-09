@@ -20,6 +20,11 @@
 | **Instagram** | API (OAuth) | Profile analytics |
 | **LinkedIn** | API (OAuth) | Profile/org analytics |
 | **Licensing** | API | Open source telemetry (instances, geo, versions) |
+| **Figma** | MCP | Design files and prototypes |
+| **HubSpot** | MCP | CRM and marketing automation |
+| **DocuSign** | MCP | E-signatures and contract management |
+| **Amplitude** | MCP | Product analytics |
+| **Intercom** | MCP | Customer support platform |
 
 ## GitHub Repositories
 

@@ -1,4 +1,4 @@
-# Agents (10 core + custom)
+# Agents (16 core + custom)
 
 Defined in `.claude/agents/`. Each agent has an isolated domain and can be invoked via command. Custom agents use `custom-` prefix (gitignored).
 
@@ -14,6 +14,12 @@ Defined in `.claude/agents/`. Each agent has an isolated domain and can be invok
 | **Nex** | `/nex` | Sales — pipeline, proposals, qualification |
 | **Mentor** | `/mentor` | Courses — learning paths, modules, Evo Academy |
 | **Oracle** | `/oracle` | Workspace knowledge — docs, how-to, configuration |
+| **Mako** | `/mako` | Marketing — campaigns, content strategy, SEO, email, brand |
+| **Aria** | `/aria` | HR / People — recruiting, onboarding, performance, compensation |
+| **Zara** | `/zara` | Customer Success — triage, escalation, health scores, KB |
+| **Lex** | `/lex` | Legal / Compliance — contracts, NDA, LGPD, risk assessment |
+| **Nova** | `/nova` | Product — specs, roadmaps, metrics, research, prioritization |
+| **Dex** | `/dex` | Data / BI — analysis, SQL, dashboards, visualizations |
 
 ## Custom Agents
 

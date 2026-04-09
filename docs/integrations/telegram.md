@@ -2,6 +2,8 @@
 
 Telegram provides real-time messaging and notifications via a bot connected through MCP. The @clawdia agent uses it to send alerts, receive commands, and communicate with the user on the go.
 
+> **Channel mode:** Telegram also works as a [Channel](../guides/channels.md#setup-telegram) — a bidirectional chat bridge that pushes messages into your Claude Code session. Start with `make telegram`. See the [Channels Guide](../guides/channels.md) for full setup including pairing and security.
+
 ## Setup
 
 ### 1. Create a Bot

@@ -18,7 +18,7 @@ PYTHON = "uv run python" if os.system("command -v uv > /dev/null 2>&1") == 0 els
 ROUTINES_DIR = WORKSPACE / "ADWs" / "routines"
 
 
-def run_adw(name: str, script: str):
+def run_adw(name: str, script: str, args: str = ""):
     """Execute a routine as subprocess."""
     now = datetime.now().strftime("%H:%M")
     script_path = ROUTINES_DIR / script
@@ -27,8 +27,11 @@ def run_adw(name: str, script: str):
         return
 
     try:
+        cmd = f"{PYTHON} {script_path}"
+        if args:
+            cmd += f" {args}"
         result = subprocess.run(
-            f"{PYTHON} {script_path}",
+            cmd,
             shell=True,
             cwd=str(WORKSPACE),
             timeout=900,
@@ -51,7 +54,8 @@ def setup_schedule():
     schedule.every().day.at("07:00").do(run_adw, "Good Morning", "good_morning.py")
     schedule.every().day.at("21:00").do(run_adw, "End of Day", "end_of_day.py")
     schedule.every().day.at("21:15").do(run_adw, "Memory Sync", "memory_sync.py")
-    schedule.every().friday.at("08:00").do(run_adw, "Weekly Review", "weekly_review.py")
+    # Disabled — replaced by Weekly Review (Team) in routines.yaml
+    # schedule.every().friday.at("08:00").do(run_adw, "Weekly Review", "weekly_review.py")
     schedule.every().sunday.at("09:00").do(run_adw, "Memory Lint", "memory_lint.py")
 
     # ── Custom routines (from config/routines.yaml if exists) ──
@@ -76,22 +80,24 @@ def _load_custom_routines(schedule):
                 continue
             script = r.get("script", "")
             name = r.get("name", script)
+            args = r.get("args", "")
             if r.get("interval"):
-                schedule.every(int(r["interval"])).minutes.do(run_adw, name, f"custom/{script}")
+                schedule.every(int(r["interval"])).minutes.do(run_adw, name, f"custom/{script}", args)
             elif r.get("time"):
-                schedule.every().day.at(r["time"]).do(run_adw, name, f"custom/{script}")
+                schedule.every().day.at(r["time"]).do(run_adw, name, f"custom/{script}", args)
 
         for r in config.get("weekly", []) or []:
             if not r.get("enabled", True):
                 continue
             script = r.get("script", "")
             name = r.get("name", script)
+            args = r.get("args", "")
             day = r.get("day", "friday").lower()
             time_str = r.get("time", "09:00")
             days = r.get("days", [day])
             for d in days:
                 getattr(schedule.every(), d, schedule.every().friday).at(time_str).do(
-                    run_adw, name, f"custom/{script}"
+                    run_adw, name, f"custom/{script}", args
                 )
 
         global _monthly_routines
@@ -128,7 +134,7 @@ def main():
         if now.day == 1 and now.hour == 8 and not monthly_ran:
             for r in _monthly_routines:
                 if r.get("enabled", True):
-                    run_adw(r.get("name", r.get("script", "")), f"custom/{r['script']}")
+                    run_adw(r.get("name", r.get("script", "")), f"custom/{r['script']}", r.get("args", ""))
             monthly_ran = True
         elif now.day != 1:
             monthly_ran = False

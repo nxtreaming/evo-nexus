@@ -205,6 +205,34 @@ For actions that should run **once** at a specific time (not recurring), use **S
 "Check community every day at 20h" → routine (recurring)
 ```
 
+## Agent Teams (Experimental, Opt-in)
+
+Parallel multi-agent versions of consolidation routines. Instead of one agent collecting data sequentially, Agent Teams spawn domain-specific teammates that work in parallel — each in their own context window.
+
+**Trade-off:** ~3-5x higher token cost, but faster execution and each agent uses its own domain expertise.
+
+| Target | Normal equivalent | Lead | Teammates |
+|--------|------------------|------|-----------|
+| `make team-strategy` | `make run R=strategy-digest` | @sage | @atlas, @flux, @pulse, @pixel |
+| `make team-dashboard` | `make run R=dashboard` | @clawdia | @atlas, @flux, @pulse, @dex |
+| `make team-weekly` | `make run R=weekly-review` | @clawdia | @atlas, @flux, @pulse |
+
+Scripts live in `ADWs/routines/teams/`. These are **never scheduled** — run manually when you want speed or richer cross-domain analysis.
+
+Requires the experimental flag (already enabled in `.claude/settings.json`):
+
+```json
+{ "env": { "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1" } }
+```
+
+How it works:
+1. The lead agent (e.g., @sage) creates an agent team
+2. Each teammate is spawned using the corresponding agent type (e.g., `atlas-project`)
+3. Teammates collect domain data in parallel
+4. The lead waits for all teammates, then synthesizes findings into the final output
+
+Metrics for team runs appear as `team-strategy-digest`, `team-dashboard`, etc. in `metrics.json`, separate from normal runs — making it easy to compare cost and speed.
+
 ## Logs and Metrics
 
 ### Log files

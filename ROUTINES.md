@@ -137,3 +137,22 @@ make list-routines
 # All commands
 make help
 ```
+
+## Agent Teams (Experimental, Opt-in)
+
+Parallel multi-agent versions of consolidation routines. Instead of one agent collecting data sequentially, Agent Teams spawn domain-specific teammates that work in parallel.
+
+**Trade-off:** ~3-5x higher token cost, but faster execution and each agent uses its own domain expertise.
+
+| Target | Normal equivalent | Lead | Teammates |
+|--------|------------------|------|-----------|
+| `make team-strategy` | `make run R=strategy-digest` | @sage | @atlas, @flux, @pulse, @pixel |
+| `make team-dashboard` | `make run R=dashboard` | @clawdia | @atlas, @flux, @pulse, @dex |
+| `make team-weekly` | `make run R=weekly-review` | @clawdia | @atlas, @flux, @pulse |
+
+Scripts live in `ADWs/routines/teams/`. These are never scheduled — run manually when you want speed or richer cross-domain analysis.
+
+Requires Claude Code v2.1.32+ and the experimental flag (already enabled in `.claude/settings.json`):
+```json
+{ "env": { "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1" } }
+```

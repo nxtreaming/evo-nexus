@@ -12,6 +12,12 @@ import {
   Users,
   Compass,
   BookOpen,
+  Megaphone,
+  UserCheck,
+  Headphones,
+  Scale,
+  Lightbulb,
+  BarChart3,
   type LucideIcon,
 } from 'lucide-react'
 import { api } from '../lib/api'
@@ -115,6 +121,54 @@ const AGENT_META: Record<string, AgentMeta> = {
     command: '/oracle',
     label: 'Knowledge',
   },
+  'mako-marketing': {
+    icon: Megaphone,
+    color: '#FB923C',
+    colorMuted: 'rgba(251,146,60,0.12)',
+    glowColor: 'rgba(251,146,60,0.15)',
+    command: '/mako',
+    label: 'Marketing',
+  },
+  'aria-hr': {
+    icon: UserCheck,
+    color: '#F472B6',
+    colorMuted: 'rgba(244,114,182,0.12)',
+    glowColor: 'rgba(244,114,182,0.15)',
+    command: '/aria',
+    label: 'HR / People',
+  },
+  'zara-cs': {
+    icon: Headphones,
+    color: '#22D3EE',
+    colorMuted: 'rgba(34,211,238,0.12)',
+    glowColor: 'rgba(34,211,238,0.15)',
+    command: '/zara',
+    label: 'Customer Success',
+  },
+  'lex-legal': {
+    icon: Scale,
+    color: '#C084FC',
+    colorMuted: 'rgba(192,132,252,0.12)',
+    glowColor: 'rgba(192,132,252,0.15)',
+    command: '/lex',
+    label: 'Legal',
+  },
+  'nova-product': {
+    icon: Lightbulb,
+    color: '#60A5FA',
+    colorMuted: 'rgba(96,165,250,0.12)',
+    glowColor: 'rgba(96,165,250,0.15)',
+    command: '/nova',
+    label: 'Product',
+  },
+  'dex-data': {
+    icon: BarChart3,
+    color: '#FBBF24',
+    colorMuted: 'rgba(251,191,36,0.12)',
+    glowColor: 'rgba(251,191,36,0.15)',
+    command: '/dex',
+    label: 'Data / BI',
+  },
 }
 
 const DEFAULT_META: AgentMeta = {
@@ -156,7 +210,7 @@ function AgentCard({ agent, isRunning }: { agent: Agent; isRunning: boolean }) {
   return (
     <Link
       to={`/agents/${agent.name}`}
-      className="group relative block rounded-xl border border-[#21262d] bg-[#161b22] p-5 transition-all duration-300 hover:border-transparent"
+      className="group relative block rounded-xl border border-[#21262d] bg-[#161b22] p-3.5 transition-all duration-300 hover:border-transparent"
       style={{
         ['--agent-color' as string]: meta.color,
         ['--agent-glow' as string]: meta.glowColor,
@@ -172,12 +226,12 @@ function AgentCard({ agent, isRunning }: { agent: Agent; isRunning: boolean }) {
       />
 
       {/* Top row: icon + status */}
-      <div className="relative flex items-start justify-between mb-4">
+      <div className="relative flex items-start justify-between mb-3">
         <div
-          className="flex h-10 w-10 items-center justify-center rounded-lg transition-transform duration-300 group-hover:scale-110"
+          className="flex h-8 w-8 items-center justify-center rounded-lg transition-transform duration-300 group-hover:scale-110"
           style={{ backgroundColor: meta.colorMuted }}
         >
-          <Icon size={20} style={{ color: meta.color }} />
+          <Icon size={16} style={{ color: meta.color }} />
         </div>
 
         {/* Status dot + running badge */}
@@ -203,22 +257,22 @@ function AgentCard({ agent, isRunning }: { agent: Agent; isRunning: boolean }) {
 
       {/* Name + domain label */}
       <div className="relative mb-1.5">
-        <h3 className="text-[15px] font-semibold text-[#e6edf3] transition-colors duration-200 group-hover:text-white">
+        <h3 className="text-[13px] font-semibold text-[#e6edf3] transition-colors duration-200 group-hover:text-white">
           {formatAgentName(agent.name)}
         </h3>
         <div className="mt-1 flex items-center gap-2">
           <span
-            className="inline-block text-[11px] font-medium uppercase tracking-wider"
+            className="inline-block text-[10px] font-medium uppercase tracking-wider"
             style={{ color: meta.color, opacity: 0.8 }}
           >
             {meta.label}
           </span>
           {agent.custom ? (
-            <span className="rounded-full bg-[#6B7280]/10 px-2 py-0.5 text-[10px] font-medium text-[#6B7280] border border-[#6B7280]/20">
+            <span className="rounded-full bg-[#6B7280]/10 px-1.5 py-0.5 text-[9px] font-medium text-[#6B7280] border border-[#6B7280]/20">
               custom
             </span>
           ) : (
-            <span className="rounded-full bg-[#22C55E]/10 px-2 py-0.5 text-[10px] font-medium text-[#22C55E] border border-[#22C55E]/20">
+            <span className="rounded-full bg-[#22C55E]/10 px-1.5 py-0.5 text-[9px] font-medium text-[#22C55E] border border-[#22C55E]/20">
               core
             </span>
           )}
@@ -226,23 +280,23 @@ function AgentCard({ agent, isRunning }: { agent: Agent; isRunning: boolean }) {
       </div>
 
       {/* Description */}
-      <p className="relative mb-4 text-[13px] leading-relaxed text-[#667085] line-clamp-2">
+      <p className="relative mb-3 text-[11px] leading-relaxed text-[#667085] line-clamp-2">
         {agent.description || 'No description available.'}
       </p>
 
       {/* Bottom row: command badge + memory badge */}
       <div className="relative flex items-center justify-between">
         {meta.command ? (
-          <code className="rounded-md bg-[#0d1117] px-2 py-1 font-mono text-xs text-[#8b949e] border border-[#21262d]">
+          <code className="rounded-md bg-[#0d1117] px-1.5 py-0.5 font-mono text-[10px] text-[#8b949e] border border-[#21262d]">
             {meta.command}
           </code>
         ) : (
           <span />
         )}
 
-        <div className="flex items-center gap-1.5 rounded-full bg-[#0d1117] px-2.5 py-1 border border-[#21262d]">
-          <Brain size={12} className="text-[#667085]" />
-          <span className="text-xs font-medium text-[#8b949e]">
+        <div className="flex items-center gap-1 rounded-full bg-[#0d1117] px-2 py-0.5 border border-[#21262d]">
+          <Brain size={10} className="text-[#667085]" />
+          <span className="text-[10px] font-medium text-[#8b949e]">
             {agent.memory_count}
           </span>
         </div>
@@ -348,7 +402,7 @@ export default function Agents() {
       </div>
 
       {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
           {[...Array(9)].map((_, i) => (
             <SkeletonCard key={i} />
           ))}
@@ -364,7 +418,7 @@ export default function Agents() {
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
           {agents.map((agent) => (
             <AgentCard key={agent.name} agent={agent} isRunning={runningAgents.some(r => agent.name.includes(r) || r.includes(agent.name.split('-')[0]))} />
           ))}

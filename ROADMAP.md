@@ -56,13 +56,13 @@
 ### Agent System
 
 - [x] 🔥 **Generalize existing agents** — all 9 agent prompts generalized. User-specific context preserved in `_improvements.md` per agent memory folder. Adapter patterns documented as future work.
-- [ ] 🔥 **New business agents** — expand functional coverage:
-  - [ ] **Marketing Agent** — orchestrate existing `mkt-*` skills, attribution, budget, full funnel
-  - [ ] **HR / People Agent** — onboarding, 1:1s, performance reviews, hiring pipeline
-  - [ ] **Customer Success Agent** — health score, churn prediction, NPS/CSAT, client onboarding
-  - [ ] **Legal / Compliance Agent** — contracts, renewals, GDPR/LGPD, compliance checklists
-  - [ ] **Product Agent** — discovery, feature prioritization (RICE/ICE), PLG metrics, feedback loop
-  - [ ] **Data / BI Agent** — cross-area consolidated dashboard, unified KPIs, alerts, trend analysis
+- [x] 🔥 **New business agents** — expand functional coverage:
+  - [x] **Marketing Agent** — orchestrate existing `mkt-*` skills, attribution, budget, full funnel
+  - [x] **HR / People Agent** — onboarding, 1:1s, performance reviews, hiring pipeline
+  - [x] **Customer Success Agent** — health score, churn prediction, NPS/CSAT, client onboarding
+  - [x] **Legal / Compliance Agent** — contracts, renewals, GDPR/LGPD, compliance checklists
+  - [x] **Product Agent** — discovery, feature prioritization (RICE/ICE), PLG metrics, feedback loop
+  - [x] **Data / BI Agent** — cross-area consolidated dashboard, unified KPIs, alerts, trend analysis
 - [x] **Custom agents** — `custom-` prefix, gitignored, auto-discovered by dashboard (core/custom badges), `create-agent` skill, `create-command` skill
 - [x] **Help agent (Oracle)** — `/oracle` answers questions about the workspace by reading the actual docs. No RAG needed — reads `docs/llms-full.txt` and source files directly
 
@@ -90,7 +90,7 @@
 ### Community & Docs
 
 - [x] 🔥 **Public roadmap** — this file. Community input welcome via [discussions](https://github.com/EvolutionAPI/open-claude/discussions).
-- [ ] **Telegram & Discord channels** — activate community channels, document in README and docs site.
+- [x] **Telegram & Discord channels** — activate community channels, document in README and docs site.
 - [ ] **In-app tutorials** — contextual tutorials surfaced inside the dashboard, not just external docs.
 - [ ] **Resume Claude sessions in chat** — list active/resumable Claude sessions in dashboard chat with `--resume` support.
 

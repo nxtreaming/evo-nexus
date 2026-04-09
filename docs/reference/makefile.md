@@ -52,14 +52,28 @@ Any script in `ADWs/routines/` or `ADWs/routines/custom/` is automatically disco
 make daily           # Runs: sync + review (sync meetings then organize tasks)
 ```
 
-## Servers
+## Servers & Channels
 
 ```bash
-make scheduler       # Start the routine scheduler (runs in foreground)
-make telegram        # Start Telegram bot in background (screen session)
-make telegram-stop   # Stop the Telegram bot
-make telegram-attach # Attach to Telegram terminal (Ctrl+A D to detach)
+make scheduler              # Start the routine scheduler (runs in foreground)
+
+# Telegram channel
+make telegram               # Start Telegram bot in background (screen session)
+make telegram-stop          # Stop the Telegram bot
+make telegram-attach        # Attach to Telegram terminal (Ctrl+A D to detach)
+
+# Discord channel (chat bidirecional, diferente da integração API do @pulse)
+make discord-channel        # Start Discord channel in background (screen session)
+make discord-channel-stop   # Stop the Discord channel
+make discord-channel-attach # Attach to Discord channel terminal (Ctrl+A D to detach)
+
+# iMessage channel (macOS only)
+make imessage               # Start iMessage channel in background (screen session)
+make imessage-stop          # Stop the iMessage channel
+make imessage-attach        # Attach to iMessage terminal (Ctrl+A D to detach)
 ```
+
+See [Channels Guide](../guides/channels.md) for full setup instructions.
 
 ## Observability
 
@@ -80,6 +94,16 @@ make docker-down       # Stop all containers
 make docker-logs       # Show container logs (follow mode)
 make docker-run ADW=good_morning.py  # Run a specific routine in Docker
 make docker-build      # Build the Docker image
+```
+
+## Agent Teams (Experimental)
+
+Parallel multi-agent versions of consolidation routines. Higher token cost (~3-5x), faster execution.
+
+```bash
+make team-strategy   # Strategy digest via agent team (@sage leads, @atlas/@flux/@pulse/@pixel)
+make team-dashboard  # Dashboard via agent team (@clawdia leads, @atlas/@flux/@pulse/@dex)
+make team-weekly     # Weekly review via agent team (@clawdia leads, @atlas/@flux/@pulse)
 ```
 
 ## Help

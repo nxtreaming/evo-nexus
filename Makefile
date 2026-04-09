@@ -79,6 +79,22 @@ list-routines:      ## 📋 List all available routines (dynamic from scripts)
 	print(f'\n  {len(routines)} routines available — run with: make run R=<id>'); \
 	"
 
+# ── Agent Teams (experimental, opt-in) ───
+# Parallel multi-agent versions of consolidation routines.
+# Higher token cost (~3-5x), faster execution. Run manually when you want speed.
+
+team-strategy:      ## 🧪 Strategy digest via agent team (parallel, experimental)
+	@echo "⚠️  Agent Teams mode — expect higher token cost (~3-5x vs normal)"
+	$(PYTHON) $(ADW_DIR)/custom/strategy_digest.py --team
+
+team-dashboard:     ## 🧪 Dashboard via agent team (parallel, experimental)
+	@echo "⚠️  Agent Teams mode — expect higher token cost (~3-5x vs normal)"
+	$(PYTHON) $(ADW_DIR)/custom/dashboard.py --team
+
+team-weekly:        ## 🧪 Weekly review via agent team (parallel, experimental)
+	@echo "⚠️  Agent Teams mode — expect higher token cost (~3-5x vs normal)"
+	$(PYTHON) $(ADW_DIR)/weekly_review.py --team
+
 # ── Combos ────────────────────────────────
 
 daily:              ## ☀️  Combo: sync meetings + review todoist
@@ -107,6 +123,38 @@ telegram-stop:      ## 🛑 Stop the Telegram bot
 
 telegram-attach:    ## 📺 Connect to Telegram terminal (Ctrl+A D to detach)
 	@screen -r telegram
+
+discord-channel:    ## 💬 Start Discord channel in background (screen)
+	@if screen -list | grep -q '\.discord-channel'; then \
+		echo "⚠ Discord channel is already running. Use 'make discord-channel-stop' first or 'make discord-channel-attach' to connect."; \
+	else \
+		screen -dmS discord-channel claude --channels plugin:discord@claude-plugins-official --dangerously-skip-permissions; \
+		echo "✅ Discord channel running in background (screen: discord-channel)"; \
+		echo "📺 Ver: screen -r discord-channel"; \
+		echo "🛑 Parar: make discord-channel-stop"; \
+	fi
+
+discord-channel-stop: ## 🛑 Stop the Discord channel
+	@screen -S discord-channel -X quit 2>/dev/null && echo "✅ Discord channel stopped" || echo "⚠ Was not running"
+
+discord-channel-attach: ## 📺 Connect to Discord channel terminal (Ctrl+A D to detach)
+	@screen -r discord-channel
+
+imessage:           ## 💬 Start iMessage channel in background (screen)
+	@if screen -list | grep -q '\.imessage'; then \
+		echo "⚠ iMessage channel is already running. Use 'make imessage-stop' first or 'make imessage-attach' to connect."; \
+	else \
+		screen -dmS imessage claude --channels plugin:imessage@claude-plugins-official --dangerously-skip-permissions; \
+		echo "✅ iMessage channel running in background (screen: imessage)"; \
+		echo "📺 Ver: screen -r imessage"; \
+		echo "🛑 Parar: make imessage-stop"; \
+	fi
+
+imessage-stop:      ## 🛑 Stop the iMessage channel
+	@screen -S imessage -X quit 2>/dev/null && echo "✅ iMessage channel stopped" || echo "⚠ Was not running"
+
+imessage-attach:    ## 📺 Connect to iMessage channel terminal (Ctrl+A D to detach)
+	@screen -r imessage
 
 # ── Utilities ─────────────────────────────
 
@@ -158,5 +206,5 @@ docker-build:       ## 🐳 Build the image
 help:               ## 📖 Show this help
 	@grep -E '^[a-zA-Z_-]+:.*##' Makefile | sort | awk 'BEGIN {FS = ":.*## "}; {printf "  \033[36m%-16s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: morning eod memory memory-lint weekly run list-routines daily scheduler dashboard-app telegram telegram-stop telegram-attach logs logs-detail logs-tail metrics clean-logs docker-dashboard docker-telegram docker-down docker-logs docker-run docker-build help docs-build setup
+.PHONY: morning eod memory memory-lint weekly run list-routines daily scheduler dashboard-app telegram telegram-stop telegram-attach discord-channel discord-channel-stop discord-channel-attach imessage imessage-stop imessage-attach logs logs-detail logs-tail metrics clean-logs docker-dashboard docker-telegram docker-down docker-logs docker-run docker-build help docs-build setup team-strategy team-dashboard team-weekly
 .DEFAULT_GOAL := help

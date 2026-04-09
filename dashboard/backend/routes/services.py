@@ -40,9 +40,26 @@ def list_services():
         {
             "id": "telegram",
             "name": "Telegram Bot",
-            "description": "Telegram Bot — receives and responds to messages via Claude",
+            "description": "Telegram Channel — receives and responds to messages via Claude",
             "command": "make telegram",
+            "category": "channel",
             **_check_process("screen -list 2>/dev/null | grep telegram"),
+        },
+        {
+            "id": "discord-channel",
+            "name": "Discord Channel",
+            "description": "Discord Channel — bidirectional chat bridge with Claude Code",
+            "command": "make discord-channel",
+            "category": "channel",
+            **_check_process("screen -list 2>/dev/null | grep discord-channel"),
+        },
+        {
+            "id": "imessage",
+            "name": "iMessage Channel",
+            "description": "iMessage Channel — chat with Claude via Messages (macOS)",
+            "command": "make imessage",
+            "category": "channel",
+            **_check_process("screen -list 2>/dev/null | grep imessage"),
         },
         {
             "id": "dashboard",
@@ -91,11 +108,15 @@ SCHEDULER_LOG = f"{WORKSPACE_STR}/ADWs/logs/scheduler.log"
 START_CMDS = {
     "scheduler": f"cd {WORKSPACE_STR} && nohup uv run python -u scheduler.py >> {SCHEDULER_LOG} 2>&1 &",
     "telegram": f"cd {WORKSPACE_STR} && screen -dmS telegram claude --channels plugin:telegram@claude-plugins-official --dangerously-skip-permissions",
+    "discord-channel": f"cd {WORKSPACE_STR} && screen -dmS discord-channel claude --channels plugin:discord@claude-plugins-official --dangerously-skip-permissions",
+    "imessage": f"cd {WORKSPACE_STR} && screen -dmS imessage claude --channels plugin:imessage@claude-plugins-official --dangerously-skip-permissions",
 }
 
 STOP_CMDS = {
     "scheduler": "pkill -f 'scheduler.py' 2>/dev/null",
     "telegram": "screen -S telegram -X quit 2>/dev/null",
+    "discord-channel": "screen -S discord-channel -X quit 2>/dev/null",
+    "imessage": "screen -S imessage -X quit 2>/dev/null",
 }
 
 
@@ -179,6 +200,23 @@ def service_logs(service_id):
             pass
 
         return jsonify({"lines": ["Scheduler is not running. Click Start to launch it."]})
+
+    elif service_id in ("discord-channel", "imessage"):
+        screen_name = service_id
+        label = "Discord channel" if service_id == "discord-channel" else "iMessage channel"
+        try:
+            result = subprocess.run(f"screen -list 2>/dev/null | grep {screen_name}", shell=True, capture_output=True, text=True, timeout=3)
+            if result.returncode == 0:
+                return jsonify({"lines": [
+                    f"{label} is running.",
+                    "Logs are available in the screen session.",
+                    f"Attach with: make {screen_name}-attach",
+                    "",
+                    f"Screen: {result.stdout.strip()}",
+                ]})
+        except Exception:
+            pass
+        return jsonify({"lines": [f"{label} is not running. Click Start to launch it."]})
 
     return jsonify({"error": "Unknown service"}), 400
 

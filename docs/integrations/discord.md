@@ -2,6 +2,8 @@
 
 Discord integration enables community monitoring, message retrieval, channel management, and automated pulse reports via the @pulse agent.
 
+> **Discord Channel vs Discord API:** This page covers the Discord **API integration** used by @pulse for community monitoring (reading messages, sending announcements, managing channels). There is also a Discord **Channel** — a bidirectional chat bridge that pushes DMs into your Claude Code session. They are independent and can coexist. See the [Channels Guide](../guides/channels.md#setup-discord-channel) for channel setup.
+
 ## Setup
 
 ### 1. Create a Discord Bot

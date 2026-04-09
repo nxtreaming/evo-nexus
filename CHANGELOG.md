@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.10.0] - 2026-04-09
+
+### Added
+- **6 new core agents** — Mako (Marketing), Aria (HR/People), Zara (Customer Success), Lex (Legal/Compliance), Nova (Product), Dex (Data/BI). Each with system prompt, slash command, dashboard card with icon and color, and dedicated skills.
+- **~80 new skills** — HR (`hr-*`), Legal (`legal-*`), Ops (`ops-*`), Product Management (`pm-*`), Customer Success (`cs-*`), Data/BI (`data-*`), Marketing (`mkt-*`). Skill count: ~68 → ~180.
+- **Channels** — bidirectional chat bridges that push messages into a running Claude Code session. Discord and iMessage channels added alongside existing Telegram. Each runs as a background screen session.
+- **Channel documentation** — `docs/guides/channels.md` (setup guide for all 3 channels) and `docs/guides/channels-reference.md` (technical reference for building custom channels/webhooks).
+- **Dashboard channels section** — Services page now shows "Channels" as a separate section with Telegram, Discord Channel, and iMessage Channel cards (Start/Stop/Logs).
+- **Agent documentation** — individual doc pages for all 16 agents in `docs/agents/`.
+- **Makefile targets** — `discord-channel`, `discord-channel-stop`, `discord-channel-attach`, `imessage`, `imessage-stop`, `imessage-attach`.
+
+### Changed
+- **Agent count** — 10 → 16 core agents across README, docs, dashboard, and rules
+- **Skill count** — ~68 → ~180 across README, docs, and dashboard
+- **Dashboard AGENT_META** — all 16 agents now have dedicated icons, colors, and command badges
+- **README** — updated architecture diagram, agent list, skill count, dashboard features, and workspace structure
+
 ## [0.9.0] - 2026-04-09
 
 ### Added

@@ -4,6 +4,20 @@ OpenClaude connects to external services through three mechanisms: **MCP servers
 
 ![Integrations overview](../imgs/doc-integrations.png)
 
+## Channels (Bidirectional)
+
+Channels are a different kind of integration: external systems **push** events into your running Claude Code session, and Claude can reply back through the same channel. Unlike API clients (which Claude calls on-demand) or MCP servers (which expose tools), channels deliver messages in real time.
+
+| Channel | Platform | Make Command | Guide |
+|---------|----------|-------------|-------|
+| Telegram | Mobile/Desktop | `make telegram` | [Setup](../guides/channels.md#setup-telegram) |
+| Discord | Desktop/Mobile | `make discord-channel` | [Setup](../guides/channels.md#setup-discord-channel) |
+| iMessage | macOS only | `make imessage` | [Setup](../guides/channels.md#setup-imessage) |
+
+> **Note:** The Discord channel (bidirectional chat with Claude Code) is separate from the Discord API integration (community monitoring via @pulse). Both can coexist.
+
+Full guide: [Channels](../guides/channels.md) | Technical reference: [Channels Reference](../guides/channels-reference.md)
+
 ## Integration Types
 
 ### MCP Servers

@@ -5,6 +5,173 @@ Complete reference.
 
 ---
 
+# Aria — HR & People
+
+**Command:** `/aria` | **Color:** pink | **Model:** Sonnet
+
+Aria is the HR and People Operations agent — it manages the recruiting pipeline, performance reviews, onboarding, compensation benchmarking, org planning, and policy lookup. Aria helps you build and maintain a healthy organization by keeping people processes structured, documented, and on schedule.
+
+## When to Use
+
+- Check the current recruiting pipeline status and candidate progress
+- Generate an onboarding checklist for a new hire starting next week
+- Kick off the quarterly performance review cycle
+- Run a compensation benchmark for a specific role or level
+- Look up the remote work policy or any other company policy
+
+## Preloaded Skills
+
+| Skill | What it does |
+|-------|-------------|
+| `hr-recruiting-pipeline` | Track and manage hiring pipeline stages and candidate status |
+| `hr-performance-review` | Set up review cycles with self-assessment and manager templates |
+| `hr-onboarding` | Generate first-week checklists and onboarding plans |
+| `hr-comp-analysis` | Benchmark salaries and model compensation packages |
+| `hr-draft-offer` | Draft offer letters with compensation details and terms |
+| `hr-interview-prep` | Create structured interview plans with competency-based questions |
+| `hr-org-planning` | Plan headcount, org design, and team structure |
+| `hr-people-report` | Generate headcount, attrition, and organizational health reports |
+| `hr-policy-lookup` | Find and explain company policies in plain language |
+
+## Example Interactions
+
+```
+/aria show me the recruiting pipeline status
+/aria create an onboarding checklist for a new backend developer
+/aria run a compensation benchmark for senior engineers in Brazil
+```
+
+## Routines
+
+This agent is not used in any scheduled routines.
+
+## Memory
+
+Persistent memory at `.claude/agent-memory/aria/`. Stores project context, user preferences, and feedback across sessions.
+
+
+---
+
+# Atlas — Projects & Ops
+
+**Command:** `/atlas` | **Color:** green | **Model:** Sonnet
+
+Atlas is the project management agent — tracking Linear issues, GitHub pull requests, sprint progress, licensing telemetry, capacity planning, and status reports. Atlas keeps all development workstreams visible and helps identify blockers before they become problems.
+
+## When to Use
+
+- Checking project status, sprint progress, or blockers
+- Reviewing open GitHub PRs and community issues
+- Monitoring open source licensing growth and telemetry
+- Planning team capacity and workload distribution
+- Generating status reports with KPIs and risk flags
+
+## Preloaded Skills
+
+| Skill | What it does |
+|-------|-------------|
+| `int-github-review` | Repo health — open PRs, issues, stars, releases |
+| `int-linear-review` | Sprint and issue tracking in Linear |
+| `int-licensing` | Open source telemetry — instances, geo, versions |
+| `prod-licensing-daily` | Daily growth snapshot from licensing data |
+| `prod-licensing-weekly` | Weekly trends in licensing telemetry |
+| `prod-licensing-monthly` | Monthly deep analysis of licensing growth |
+| `ops-capacity-plan` | Team workload analysis and utilization forecast |
+| `ops-status-report` | KPI reports with risk flags and action items |
+| `ops-change-request` | Change management with impact analysis and rollback |
+
+## Example Interactions
+
+```
+/atlas what's the sprint status for this week?
+/atlas check open PRs on evolution-api
+/atlas how's licensing growth looking this month?
+```
+
+## Routines
+
+| Time | Routine |
+|------|---------|
+| Mon/Wed/Fri 09:00 | Linear Review |
+| Mon/Wed/Fri 09:15 | GitHub Review |
+| Daily 18:30 | Licensing Daily |
+| Friday 07:45 | Licensing Weekly |
+| 1st of month | Licensing Monthly |
+
+## Memory
+
+Persistent memory at `.claude/agent-memory/atlas/`. Stores project context, user preferences, and feedback across sessions.
+
+
+---
+
+# Clawdia — Operations & COO
+
+**Command:** `/clawdia` | **Color:** cyan | **Model:** Sonnet
+
+Clawdia is the operational hub and default agent — a COO-like partner that manages your calendar, emails, tasks, meetings, prioritization, decisions, research, and documentation. She keeps the daily rhythm running smoothly, from morning briefings to end-of-day consolidation, ensuring nothing falls through the cracks.
+
+## When to Use
+
+- Starting your day with "good morning" to get a full briefing of agenda, emails, and tasks
+- Checking, triaging, or drafting email replies
+- Reviewing and organizing Todoist tasks
+- Summarizing a meeting recording or syncing Fathom transcripts
+- Making a decision between options and need a structured analysis
+
+## Preloaded Skills
+
+| Skill | What it does |
+|-------|-------------|
+| `prod-good-morning` | Morning briefing with agenda, emails, tasks, and priorities |
+| `prod-end-of-day` | Daily consolidation of work done, decisions, and learnings |
+| `prod-dashboard` | 360 dashboard combining all routine outputs |
+| `prod-memory-management` | Persistent memory system for context across sessions |
+| `prod-review-todoist` | Task organization and cleanup in Todoist |
+| `prod-trends` | Weekly trends analysis across metrics |
+| `gog-calendar` | Google Calendar — view agenda and schedule events |
+| `gog-email-triage` | Inbox prioritization and classification |
+| `gog-email-draft` | Draft email replies with tone matching |
+| `gog-email-send` | Send emails with explicit confirmation |
+| `gog-followups` | Track stale email threads and generate reminders |
+| `gog-tasks` | Task management and prioritization |
+| `int-fathom` | Meeting recordings, transcripts, and summaries |
+| `int-sync-meetings` | Sync Fathom recordings to local workspace |
+| `int-todoist` | Todoist integration for task management |
+| `schedule-task` | One-off task scheduling |
+| `ops-process-doc` | Business process documentation with flowcharts and RACI |
+| `ops-runbook` | Operational runbooks for recurring procedures |
+| `ops-process-optimization` | Workflow improvement and bottleneck analysis |
+
+## Example Interactions
+
+```
+/clawdia good morning
+/clawdia check my emails and flag anything urgent
+/clawdia summarize yesterday's meeting with HostGator
+```
+
+## Routines
+
+| Time | Routine |
+|------|---------|
+| Daily 06:50 | Review Todoist |
+| Daily 07:00 | Good Morning |
+| Daily 07:15 | Email Triage |
+| Every 30min | Sync Meetings |
+| Daily 21:00 | End of Day |
+| Daily 21:15 | Memory Sync |
+| Daily 21:30 | Consolidated Dashboard |
+| Friday 08:00 | Weekly Review |
+| Sunday 09:00 | Memory Lint |
+
+## Memory
+
+Persistent memory at `.claude/agent-memory/clawdia/`. Stores project context, user preferences, and feedback across sessions.
+
+
+---
+
 # Creating a Custom Agent
 
 This guide walks through creating a new agent from scratch.
@@ -199,6 +366,415 @@ After creating both files, the agent is immediately available via `/support` in 
 
 ---
 
+# Dex — Data & BI
+
+**Command:** `/dex` | **Color:** yellow | **Model:** Sonnet
+
+Dex is the Data and BI agent, specializing in data analysis, SQL queries, interactive dashboards (Chart.js), statistical analysis, data profiling, and validation. He connects to Stripe, Omie, and Licensing APIs to turn raw data into actionable insights, visualizations, and quality-checked deliverables.
+
+## When to Use
+
+- You need to analyze a financial trend like MRR over the last 3 months
+- You want an optimized SQL query for a specific data question (e.g., churned customers)
+- You need an interactive HTML dashboard for licensing growth or revenue metrics
+- You want to run statistical analysis on conversion rates or experiment results
+- A dataset needs profiling or validation before publishing or sharing
+
+## Preloaded Skills
+
+| Skill | What it does |
+|-------|-------------|
+| `data-analyze` | Answers ad-hoc data questions from quick lookups to full reports |
+| `data-build-dashboard` | Builds interactive HTML dashboards with charts, filters, and tables |
+| `data-write-query` | Writes optimized SQL for PostgreSQL with best practices |
+| `data-explore` | Profiles datasets for shape, quality, nulls, and distributions |
+| `data-create-viz` | Creates professional Python visualizations in Evolution theme |
+| `data-statistical-analysis` | Runs descriptive stats, trend analysis, and hypothesis testing |
+| `data-validate` | Pre-delivery QA for methodology, accuracy, and bias checks |
+| `int-stripe` | Accesses Stripe financial data (charges, subscriptions, MRR) |
+| `int-omie` | Accesses Omie ERP data (clients, invoices, financials) |
+| `int-licensing` | Queries open source telemetry (instances, geo, versions) |
+
+## Example Interactions
+
+```
+/dex analyze MRR trend for the last 3 months
+/dex build a licensing growth dashboard with geo breakdown
+/dex run statistical analysis on trial-to-paid conversion rates
+```
+
+## Routines
+
+This agent is not used in any scheduled routines.
+
+## Memory
+
+Persistent memory at `.claude/agent-memory/dex/`. Stores project context, user preferences, and feedback across sessions.
+
+
+---
+
+# Flux — Finance & CFO
+
+**Command:** `/flux` | **Color:** orange | **Model:** Sonnet
+
+Flux is the virtual CFO — managing all financial operations including cash flow analysis, income statements, Stripe MRR tracking, Omie ERP integration, monthly closing processes, journal entries, reconciliation, and variance analysis. Flux ensures financial health is always visible and actionable.
+
+## When to Use
+
+- Running the monthly closing process or checking close status
+- Reviewing financial health, cash flow, or MRR trends
+- Checking pending invoices, accounts payable, or receivable
+- Preparing journal entries or reconciling accounts
+- Analyzing budget vs. actual variances
+
+## Preloaded Skills
+
+| Skill | What it does |
+|-------|-------------|
+| `fin-daily-pulse` | Daily financial snapshot from Stripe and Omie |
+| `fin-weekly-report` | Weekly consolidation of revenue, expenses, and cash flow |
+| `fin-monthly-close-kickoff` | Initiates month-end closing with checklist and P&L |
+| `fin-close-management` | Track close tasks, dependencies, and status |
+| `fin-financial-statements` | Generate P&L, balance sheet, and cash flow statements |
+| `fin-journal-entry` | Prepare journal entries with debits and credits |
+| `fin-journal-entry-prep` | Month-end entry preparation with supporting docs |
+| `fin-reconciliation` | GL vs subledger and bank reconciliation |
+| `fin-variance-analysis` | Budget vs actual decomposition with narratives |
+| `fin-audit-support` | SOX compliance documentation and support |
+| `fin-sox-testing` | Control testing sample selection and workpapers |
+| `int-stripe` | Stripe API — charges, subscriptions, MRR, churn |
+| `int-omie` | Omie ERP — clients, invoices, financials |
+
+## Example Interactions
+
+```
+/flux how's our cash flow this month?
+/flux start the monthly closing for March
+/flux what's our current MRR and churn rate?
+```
+
+## Routines
+
+| Time | Routine |
+|------|---------|
+| Daily 19:00 | Financial Pulse |
+| Friday 07:30 | Financial Weekly |
+| 1st of month | Monthly Close Kickoff |
+
+## Memory
+
+Persistent memory at `.claude/agent-memory/flux/`. Stores project context, user preferences, and feedback across sessions.
+
+
+---
+
+# Kai — Personal Assistant
+
+**Command:** `/kai` | **Color:** blue | **Model:** Sonnet
+
+Kai is your personal assistant — completely isolated from professional matters. It handles health tracking, habits, personal routines, appointments, and travel planning. Kai reads health data from `workspace/personal/data/health-data.js` and keeps your personal life organized without mixing it into work context.
+
+## When to Use
+
+- Check your health progress or review recent health metrics
+- Schedule a blood test, doctor visit, or other medical appointment
+- Plan a personal trip or vacation itinerary
+- Review personal appointments for the week
+- Track habits and daily routines
+
+## Preloaded Skills
+
+| Skill | What it does |
+|-------|-------------|
+| `gog-calendar` | Manage personal appointments and schedule events |
+| `gog-tasks` | Create and organize personal to-do items |
+
+## Example Interactions
+
+```
+/kai how is my health progress this month?
+/kai schedule a blood test for next Tuesday morning
+/kai plan a 5-day trip to Lisbon in July
+```
+
+## Routines
+
+| Day | Time | Routine | Make |
+|-----|------|---------|------|
+| Sunday | 10:00 | Health Check-in | `make health` |
+
+## Memory
+
+Persistent memory at `.claude/agent-memory/kai/`. Stores project context, user preferences, and feedback across sessions.
+
+
+---
+
+# Lex — Legal & Compliance
+
+**Command:** `/lex` | **Color:** purple | **Model:** Sonnet
+
+Lex is the Legal and Compliance agent, handling contract review, NDA triage, LGPD compliance, risk assessment, legal briefs, vendor checks, and signature requests. He provides clause-by-clause analysis, flags regulatory concerns, and ensures legal workflows move efficiently from review to execution.
+
+## When to Use
+
+- You need to review a contract and flag risky or non-standard clauses
+- An NDA arrived from a vendor and needs quick green/yellow/red classification
+- You want to run a LGPD or regulatory compliance check on a product feature or initiative
+- You need to assess the legal risk of a vendor agreement or partnership
+- You want to draft a legal brief or prepare for a meeting with legal context
+
+## Preloaded Skills
+
+| Skill | What it does |
+|-------|-------------|
+| `legal-review-contract` | Clause-by-clause contract review against negotiation playbook |
+| `legal-compliance-check` | Regulatory assessment for proposed actions or features |
+| `legal-triage-nda` | Quick NDA classification as green, yellow, or red |
+| `legal-brief` | Contextual legal briefings for daily work or incident response |
+| `legal-response` | Templated legal responses with escalation checks |
+| `legal-risk-assessment` | Severity x likelihood risk matrix with escalation criteria |
+| `legal-meeting-briefing` | Meeting prep with legal context and action item tracking |
+| `legal-signature-request` | E-signature workflow with pre-signature checklist |
+| `legal-vendor-check` | Vendor agreement audit across connected systems |
+| `ops-risk-assessment` | Operational risk evaluation and mitigation planning |
+| `ops-compliance-tracking` | Audit readiness tracking and compliance requirement monitoring |
+
+## Example Interactions
+
+```
+/lex review this contract and flag risky clauses
+/lex triage the NDA we received from vendor X
+/lex run a LGPD compliance check on the new analytics feature
+```
+
+## Routines
+
+This agent is not used in any scheduled routines.
+
+## Memory
+
+Persistent memory at `.claude/agent-memory/lex/`. Stores project context, user preferences, and feedback across sessions.
+
+
+---
+
+# Mako — Marketing
+
+**Command:** `/mako` | **Color:** orange | **Model:** Sonnet
+
+Mako is the marketing agent — it handles campaigns, content strategy, brand voice, SEO, email sequences, competitive positioning, and performance reports. Mako helps you plan, create, and measure marketing efforts across all channels, ensuring consistency with your brand and strategic goals.
+
+## When to Use
+
+- Create a campaign brief for a product launch or lead-gen initiative
+- Run an SEO audit on your blog or landing pages
+- Draft a multi-step email sequence for onboarding or nurture
+- Generate a marketing performance report with key metrics and trends
+- Build a content calendar aligned with your brand voice and pillars
+
+## Preloaded Skills
+
+| Skill | What it does |
+|-------|-------------|
+| `mkt-brand-review` | Audit content against brand voice and style guide |
+| `mkt-campaign-plan` | Generate full campaign briefs with objectives, audience, and channel strategy |
+| `mkt-competitive-brief` | Research competitors and generate positioning comparisons |
+| `mkt-content-creation` | Draft marketing content across channels (blog, social, email, landing pages) |
+| `mkt-draft-content` | Write blog posts, social media, email newsletters, and press releases |
+| `mkt-email-sequence` | Design multi-email drip campaigns with timing and branching logic |
+| `mkt-performance-report` | Build marketing performance reports with trend analysis and recommendations |
+| `mkt-seo-audit` | Run comprehensive SEO audits with keyword research and technical checks |
+
+## Example Interactions
+
+```
+/mako create a campaign brief for the Evo AI launch
+/mako run an SEO audit on our blog
+/mako draft a 5-email onboarding sequence for new users
+```
+
+## Routines
+
+This agent is not used in any scheduled routines.
+
+## Memory
+
+Persistent memory at `.claude/agent-memory/mako/`. Stores project context, user preferences, and feedback across sessions.
+
+
+---
+
+# Mentor — Courses & Education
+
+**Command:** `/mentor` | **Color:** purple | **Model:** Sonnet
+
+Mentor is the education agent focused on course creation, learning paths, study plans, and didactic material for the Evo Academy platform. It helps structure educational content from scratch, build progressive learning journeys, and produce lesson material that is clear, engaging, and well-organized.
+
+## When to Use
+
+- You need to structure a new course from objectives to modules and lessons
+- You want to create a learning path that guides students through a topic progressively
+- You need to build a specific module or lesson about a given subject
+- You want to explain a technical concept in a way suitable for a course lesson
+- You need a study plan for learning a new technology or framework
+
+## Preloaded Skills
+
+| Skill | What it does |
+|-------|-------------|
+| `obs-obsidian-markdown` | Create and edit Obsidian-flavored markdown content with wikilinks, callouts, and properties |
+| `obs-obsidian-cli` | Interact with Obsidian vaults — read, create, search, and manage notes |
+
+## Example Interactions
+
+```
+/mentor structure a course on building AI agents with the Evolution API
+/mentor create a learning path for someone new to WhatsApp automation
+/mentor build a module about webhook configuration for intermediate users
+```
+
+## Routines
+
+This agent is not used in any scheduled routines.
+
+## Memory
+
+Persistent memory at `.claude/agent-memory/mentor/`. Stores project context, user preferences, and feedback across sessions.
+
+
+---
+
+# Nex — Sales
+
+**Command:** `/nex` | **Color:** red | **Model:** Sonnet
+
+Nex is the sales agent responsible for pipeline management, lead qualification, proposal drafting, and commercial KPIs. It operates at L1 Observer level — meaning it generates reports and drafts for approval but never sends anything directly. Use Nex for all commercial and sales-related tasks.
+
+## When to Use
+
+- You need a snapshot of the current sales pipeline status
+- You want to prepare or review a commercial proposal
+- You need to qualify a new lead or score existing ones
+- You want to track commercial KPIs (conversion rate, deal velocity, win rate)
+- You need to evaluate a vendor or compare vendor proposals
+
+## Preloaded Skills
+
+| Skill | What it does |
+|-------|-------------|
+| `int-evo-crm` | Access CRM data — contacts, conversations, pipelines, stages, and labels |
+| `ops-vendor-review` | Evaluate vendors with cost analysis, risk assessment, and recommendation |
+
+## Example Interactions
+
+```
+/nex what's the current state of our sales pipeline?
+/nex prepare a proposal for the HostGator partnership renewal
+/nex qualify this lead: mid-size SaaS company, 50 employees, looking for WhatsApp automation
+```
+
+## Routines
+
+This agent is not used in any scheduled routines.
+
+## Memory
+
+Persistent memory at `.claude/agent-memory/nex/`. Stores project context, user preferences, and feedback across sessions.
+
+
+---
+
+# Nova — Product Management
+
+**Command:** `/nova` | **Color:** blue | **Model:** Sonnet
+
+Nova is the Product Management agent, covering feature specs and PRDs, product metrics analysis, roadmap management, brainstorming sessions, stakeholder updates, and user research synthesis. She turns ideas into structured documents, keeps the roadmap current, and ensures stakeholders stay informed with data-driven updates.
+
+## When to Use
+
+- You need to write a PRD or feature spec from a problem statement or idea
+- You want to review sprint or product metrics and spot trends
+- The roadmap needs updating after new priorities or market changes
+- You want to brainstorm ideas for a new feature or product direction
+- You need to prepare a stakeholder update on quarterly progress
+
+## Preloaded Skills
+
+| Skill | What it does |
+|-------|-------------|
+| `pm-write-spec` | Creates feature specs and PRDs from problem statements |
+| `pm-metrics-review` | Analyzes product metrics with trend detection and insights |
+| `pm-roadmap-update` | Manages roadmap priorities, additions, and trade-offs |
+| `pm-product-brainstorming` | Facilitates structured ideation and problem exploration |
+| `pm-stakeholder-update` | Generates audience-tailored status updates |
+| `pm-synthesize-research` | Synthesizes interviews, surveys, and feedback into insights |
+| `int-linear-review` | Tracks sprint progress, issues, and blockers in Linear |
+| `mkt-competitive-brief` | Competitive positioning and messaging comparison |
+| `evo-sprint-planning` | Sprint planning and task generation from epics |
+
+## Example Interactions
+
+```
+/nova write a PRD for the new agent builder feature
+/nova review sprint metrics and highlight risks
+/nova brainstorm ideas for improving the onboarding flow
+```
+
+## Routines
+
+This agent is not used in any scheduled routines.
+
+## Memory
+
+Persistent memory at `.claude/agent-memory/nova/`. Stores project context, user preferences, and feedback across sessions.
+
+
+---
+
+# Oracle — Workspace Knowledge
+
+**Command:** `/oracle` | **Color:** amber | **Model:** Sonnet
+
+Oracle is the workspace knowledge agent — it answers questions about OpenClaude itself. Agents, skills, routines, integrations, the dashboard, configuration, and architecture are all in its domain. Oracle reads documentation before answering and never guesses. If it does not find the answer in the docs, it says so.
+
+## When to Use
+
+- Understand how to create a new routine, agent, or skill
+- Find out what agents are available and what each one does
+- Learn how the scheduler works or how routines are triggered
+- Check what skills a specific agent has access to
+- Discover how to add a new integration or configure an existing one
+
+## Preloaded Skills
+
+| Skill | What it does |
+|-------|-------------|
+| `initial-setup` | Onboard new users — introduce agents, skills, routines, and the dashboard |
+| `create-agent` | Guided wizard to create a new custom agent |
+| `create-command` | Create a new slash command for Claude Code |
+| `create-routine` | Guided wizard to create a new automated routine |
+
+## Example Interactions
+
+```
+/oracle how do I create a new routine?
+/oracle what skills does Flux have?
+/oracle how do I add a new MCP integration?
+```
+
+## Routines
+
+This agent is not used in any scheduled routines.
+
+## Memory
+
+Oracle has no persistent agent memory. It reads documentation on every invocation to provide accurate, up-to-date answers rather than building institutional knowledge.
+
+
+---
+
 # Agents Overview
 
 Agents are the core of OpenClaude. Each agent is a specialized AI persona with its own domain, system prompt, skills, and persistent memory.
@@ -228,6 +804,13 @@ Each agent has a corresponding command in `.claude/commands/`:
 /nex        — Sales: pipeline, proposals, qualification
 /mentor     — Courses: learning paths, modules
 /kai        — Personal: health, habits, routine
+/oracle     — Workspace knowledge: docs, how-to, configuration
+/mako       — Marketing: campaigns, SEO, email, brand
+/aria       — HR / People: recruiting, onboarding, performance
+/zara       — Customer Success: triage, escalation, KB
+/lex        — Legal / Compliance: contracts, NDA, LGPD
+/nova       — Product: specs, roadmaps, metrics, research
+/dex        — Data / BI: analysis, SQL, dashboards
 ```
 
 Usage in Claude Code:
@@ -289,20 +872,26 @@ To create a custom agent, use the `create-agent` skill or see [Creating Agents](
 .claude/agent-memory/custom-devops/  # Persistent memory
 ```
 
-## All 10 Core Agents
+## All 16 Core Agents
 
-| Agent | File | Command | Domain | Color |
-|-------|------|---------|--------|-------|
-| **Clawdia** | `clawdia-assistant.md` | `/clawdia` | Ops: agenda, emails, tasks, meetings, decisions | cyan |
-| **Flux** | `flux-finance.md` | `/flux` | Finance: Stripe, Omie, cash flow, monthly close | orange |
-| **Atlas** | `atlas-project.md` | `/atlas` | Projects: Linear, GitHub, sprints, licensing | - |
-| **Pulse** | `pulse-community.md` | `/pulse` | Community: Discord, WhatsApp, sentiment, FAQ | blue |
-| **Pixel** | `pixel-social-media.md` | `/pixel` | Social: content, calendar, cross-platform analytics | - |
-| **Sage** | `sage-strategy.md` | `/sage` | Strategy: OKRs, roadmap, competitive analysis | orange |
-| **Nex** | `nex-sales.md` | `/nex` | Sales: pipeline, proposals, qualification | - |
-| **Mentor** | `mentor-courses.md` | `/mentor` | Courses: learning paths, modules, academy | - |
-| **Kai** | `kai-personal-assistant.md` | `/kai` | Personal: health, habits, routine (isolated) | blue |
-| **Oracle** | `oracle.md` | `/oracle` | Workspace knowledge: docs, how-to, configuration | amber |
+| Agent | Command | Domain | Color |
+|-------|---------|--------|-------|
+| [**Clawdia**](clawdia.md) | `/clawdia` | Ops: agenda, emails, tasks, meetings, decisions | cyan |
+| [**Flux**](flux.md) | `/flux` | Finance: Stripe, Omie, cash flow, monthly close | orange |
+| [**Atlas**](atlas.md) | `/atlas` | Projects: Linear, GitHub, sprints, licensing | green |
+| [**Pulse**](pulse.md) | `/pulse` | Community: Discord, WhatsApp, sentiment, FAQ | blue |
+| [**Pixel**](pixel.md) | `/pixel` | Social: content, calendar, cross-platform analytics | yellow |
+| [**Sage**](sage.md) | `/sage` | Strategy: OKRs, roadmap, competitive analysis | orange |
+| [**Nex**](nex.md) | `/nex` | Sales: pipeline, proposals, qualification | red |
+| [**Mentor**](mentor.md) | `/mentor` | Courses: learning paths, modules, academy | purple |
+| [**Kai**](kai.md) | `/kai` | Personal: health, habits, routine (isolated) | blue |
+| [**Oracle**](oracle.md) | `/oracle` | Workspace knowledge: docs, how-to, configuration | amber |
+| [**Mako**](mako.md) | `/mako` | Marketing: campaigns, SEO, email sequences, brand | orange |
+| [**Aria**](aria.md) | `/aria` | HR / People: recruiting, onboarding, performance | pink |
+| [**Zara**](zara.md) | `/zara` | Customer Success: triage, escalation, health scores | cyan |
+| [**Lex**](lex.md) | `/lex` | Legal / Compliance: contracts, NDA, LGPD, risk | purple |
+| [**Nova**](nova.md) | `/nova` | Product: specs, roadmaps, metrics, research | blue |
+| [**Dex**](dex.md) | `/dex` | Data / BI: analysis, SQL, dashboards, visualizations | yellow |
 
 ### Agent Roles in Detail
 
@@ -325,6 +914,249 @@ To create a custom agent, use the `create-agent` skill or see [Creating Agents](
 **Kai** is the personal assistant with an isolated domain. Health tracking, habits, personal appointments, and routines. It does not handle professional matters.
 
 **Oracle** is the workspace knowledge agent. It answers questions about how OpenClaude works — agents, skills, routines, integrations, dashboard, configuration, and architecture — by reading the actual documentation before responding. No RAG or vector DB needed.
+
+**Mako** handles marketing. Campaign planning, content creation, brand reviews, SEO audits, email sequences, and performance reports.
+
+**Aria** manages HR and People Operations. Recruiting pipeline, performance reviews, onboarding checklists, compensation analysis, and org planning.
+
+**Zara** handles customer success. Ticket triage, escalation packaging, customer research, draft responses, and knowledge base articles.
+
+**Lex** manages legal and compliance. Contract review, NDA triage, LGPD compliance checks, risk assessment, and legal briefs.
+
+**Nova** handles product management. Feature specs/PRDs, metrics reviews, roadmap updates, product brainstorming, and stakeholder updates.
+
+**Dex** is the data and BI agent. Data analysis, SQL queries, interactive dashboards, statistical analysis, and data validation.
+
+## Preloaded Skills
+
+Each agent has a `skills` field in its frontmatter that pre-loads domain-specific skills into the agent's context at startup. This means the agent doesn't need to discover or load skills during execution — they're immediately available.
+
+```yaml
+---
+name: "flux-finance"
+skills:
+  - fin-daily-pulse
+  - fin-weekly-report
+  - int-stripe
+  - int-omie
+---
+```
+
+## Agent Teams (Experimental)
+
+For consolidation tasks that span multiple domains (strategy digest, dashboard, weekly review), Agent Teams can run domain-specific agents in parallel. Each teammate collects data from their domain simultaneously, then the lead agent synthesizes results.
+
+Agent Teams are opt-in and cost ~3-5x more tokens. Run manually:
+
+```bash
+make team-strategy    # @sage leads, @atlas + @flux + @pulse + @pixel as teammates
+make team-dashboard   # @clawdia leads, @atlas + @flux + @pulse + @dex as teammates
+make team-weekly      # @clawdia leads, @atlas + @flux + @pulse as teammates
+```
+
+See [Routines Overview](../routines/overview.md) for details on Agent Teams.
+
+
+---
+
+# Pixel — Social Media
+
+**Command:** `/pixel` | **Color:** yellow | **Model:** Sonnet
+
+Pixel is the social media agent responsible for content creation, editorial calendar management, and cross-platform analytics. It covers YouTube, Instagram, LinkedIn, Twitter/X, Threads, and Bluesky — writing posts, threads, and carousels, analyzing engagement metrics, tracking audience growth, and generating unified performance reports across all platforms.
+
+## When to Use
+
+- You need to write a LinkedIn post, Twitter thread, or carousel
+- You want to create or update a content calendar for the week/month
+- You need a cross-platform analytics report or platform-specific report (YouTube, Instagram, LinkedIn)
+- You want to repurpose a blog post or video into social media content
+- You need recommendations on what's working and how to improve engagement
+
+## Preloaded Skills
+
+| Skill | What it does |
+|-------|-------------|
+| `social-post-writer` | Write posts for LinkedIn, Twitter/X, Threads, or Bluesky |
+| `social-thread-writer` | Create multi-part threads for Twitter/X or LinkedIn |
+| `social-carousel-writer` | Build LinkedIn carousel slide content |
+| `social-hook-writer` | Craft attention-grabbing opening lines |
+| `social-content-calendar` | Plan and organize a posting schedule |
+| `social-content-strategy` | Define topic clusters and content mix |
+| `social-content-repurposer` | Adapt one piece of content across multiple platforms |
+| `social-content-pattern-analyzer` | Identify what content types and topics perform best |
+| `social-performance-analyzer` | Analyze post-level metrics and engagement |
+| `social-optimization-advisor` | Get concrete improvement recommendations |
+| `social-platform-strategy` | Platform-specific tactical guidance |
+| `social-audience-growth-tracker` | Track and analyze follower growth trends |
+| `social-context` | Set up or update profile, voice, and audience context |
+| `social-analytics-report` | Unified cross-platform analytics dashboard |
+| `social-instagram-report` | Instagram-specific analytics report |
+| `social-linkedin-report` | LinkedIn-specific analytics report |
+| `social-youtube-report` | YouTube-specific analytics report |
+| `int-instagram` | Query Instagram Graph API for metrics and insights |
+| `int-linkedin` | Query LinkedIn API for profile and org stats |
+| `int-youtube` | Query YouTube Data API for channel and video stats |
+
+## Example Interactions
+
+```
+/pixel write a LinkedIn post about our new AI agents feature
+/pixel create a content calendar for next week
+/pixel youtube report — how did our channel perform this month?
+```
+
+## Routines
+
+| Time | Routine | Command |
+|------|---------|---------|
+| Daily 18:00 | Social Analytics | `make social` |
+| Friday 08:15 | Social Analytics Weekly | `make social` |
+| 1st of month | Social Analytics Monthly | `make social` |
+
+## Memory
+
+Persistent memory at `.claude/agent-memory/pixel/`. Stores project context, user preferences, and feedback across sessions.
+
+
+---
+
+# Pulse — Community
+
+**Command:** `/pulse` | **Color:** blue | **Model:** Sonnet
+
+Pulse is the community monitoring agent — tracking Discord channels, WhatsApp groups, sentiment analysis, FAQ management, and engagement metrics. Pulse keeps a finger on the community's pulse, surfacing recurring questions, emerging issues, and contributor highlights so nothing important gets missed.
+
+## When to Use
+
+- Checking how the community is doing overall
+- Identifying frequently asked questions or recurring support topics
+- Analyzing sentiment trends across Discord and WhatsApp
+- Investigating community issues or escalations
+- Generating monthly engagement summaries or creating community updates
+
+## Preloaded Skills
+
+| Skill | What it does |
+|-------|-------------|
+| `pulse-daily` | 24h community pulse across Discord and WhatsApp |
+| `pulse-weekly` | Weekly engagement analysis and trends |
+| `pulse-monthly` | Monthly community report with growth and sentiment |
+| `pulse-faq-sync` | Update FAQ from recurring community questions |
+| `discord-get-messages` | Read and search Discord channel messages |
+| `discord-send-message` | Post messages to Discord channels |
+| `discord-list-channels` | Audit server channel structure |
+| `discord-create-channel` | Create new Discord channels |
+| `discord-manage-channel` | Update channel settings and permissions |
+| `int-whatsapp` | WhatsApp group messages and stats |
+
+## Example Interactions
+
+```
+/pulse how's the community doing this week?
+/pulse what are the most frequent questions in Discord?
+/pulse generate the monthly engagement summary
+```
+
+## Routines
+
+| Time | Routine |
+|------|---------|
+| Daily 20:00 | Community Pulse |
+| Daily 20:15 | FAQ Sync |
+| Monday 09:30 | Community Weekly |
+| 1st of month | Community Monthly |
+
+## Memory
+
+Persistent memory at `.claude/agent-memory/pulse/`. Stores project context, user preferences, and feedback across sessions.
+
+
+---
+
+# Sage — Strategy
+
+**Command:** `/sage` | **Color:** orange | **Model:** Sonnet
+
+Sage is the senior strategist agent. It handles OKR tracking, competitive analysis, roadmap planning, decision frameworks, and weekly strategy digests that synthesize financial, product, and community data into actionable strategic insights. Use Sage when you need to think about the big picture, weigh trade-offs, or make informed decisions about company direction.
+
+## When to Use
+
+- You need to decide whether to prioritize initiative X over Y
+- You want to review OKR progress or define new quarterly objectives
+- You need a competitive landscape analysis or market positioning review
+- You want a strategy digest that consolidates data across all domains
+- You need a decision framework for a partnership, monetization approach, or negotiation
+
+## Preloaded Skills
+
+| Skill | What it does |
+|-------|-------------|
+| `sage-strategy-digest` | Weekly strategic synthesis of financial, product, community, and market data |
+| `sage-okr-review` | Track OKR progress, update key results, and flag at-risk objectives |
+| `sage-competitive-analysis` | Analyze competitors and evaluate market positioning |
+
+## Example Interactions
+
+```
+/sage should we prioritize the self-hosted plan or the managed cloud offering?
+/sage OKR progress — how are we tracking for Q2?
+/sage competitive analysis of the AI CRM space
+```
+
+## Routines
+
+| Day | Routine | Command |
+|-----|---------|---------|
+| Friday 09:00 | Strategy Digest | `make strategy` |
+
+## Memory
+
+Persistent memory at `.claude/agent-memory/sage/`. Stores project context, user preferences, and feedback across sessions.
+
+
+---
+
+# Zara — Customer Success
+
+**Command:** `/zara` | **Color:** cyan | **Model:** Sonnet
+
+Zara is the Customer Success agent, responsible for ticket triage, escalation packaging, customer research, draft responses, knowledge base articles, and CRM integration. She ensures support tickets are prioritized correctly, customers get professional replies, and recurring issues are captured as self-service documentation.
+
+## When to Use
+
+- You need to triage open support tickets and assign priority levels (P1-P4)
+- You want to draft a professional response to a customer complaint (e.g., downtime, billing issue)
+- A bug or incident needs to be escalated to engineering or product with full context
+- A resolved ticket should be turned into a knowledge base article for self-service
+- You want to identify which customers are at churn risk based on recent interactions
+
+## Preloaded Skills
+
+| Skill | What it does |
+|-------|-------------|
+| `cs-ticket-triage` | Classifies and prioritizes support tickets from P1 (critical) to P4 (low) |
+| `cs-customer-escalation` | Packages escalations with full context for devs or product teams |
+| `cs-customer-research` | Multi-source lookup to gather customer history and context |
+| `cs-draft-response` | Generates professional, situation-aware customer replies |
+| `cs-kb-article` | Creates knowledge base articles from resolved issues |
+| `int-evo-crm` | Accesses CRM data for customer records, conversations, and pipelines |
+
+## Example Interactions
+
+```
+/zara triage the open support tickets from today
+/zara draft a response for the customer reporting downtime on instance X
+/zara escalate the authentication bug to engineering with full context
+```
+
+## Routines
+
+This agent is not used in any scheduled routines.
+
+## Memory
+
+Persistent memory at `.claude/agent-memory/zara/`. Stores project context, user preferences, and feedback across sessions.
 
 
 ---
@@ -1028,6 +1860,641 @@ Just open Claude Code in this directory. It reads `CLAUDE.md` automatically and 
 - Browse `.claude/skills/CLAUDE.md` for the full skill index (~80 skills)
 - Check `ROUTINES.md` for routine documentation
 - Customize `config/routines.yaml` to adjust schedules
+
+
+---
+
+# Channels Reference — Construindo Channels Customizados
+
+Referência técnica para construir um MCP server que empurra webhooks, alertas e mensagens de chat para uma sessão Claude Code.
+
+> Para usar channels já prontos (Telegram, Discord, iMessage), veja o [Guia de Channels](channels.md).
+
+## Visão Geral
+
+Um channel é um MCP server que roda na mesma máquina que o Claude Code. O Claude Code o inicia como subprocesso e comunica via stdio. Seu channel é a ponte entre sistemas externos e a sessão:
+
+- **Chat platforms** (Telegram, Discord): seu plugin roda localmente e faz polling da API da plataforma. Quando alguém envia uma DM para o bot, o plugin recebe e encaminha para Claude.
+- **Webhooks** (CI, monitoring): seu server escuta em uma porta HTTP local. Sistemas externos fazem POST nessa porta, e seu server empurra o payload para Claude.
+
+## Requisitos
+
+- [`@modelcontextprotocol/sdk`](https://www.npmjs.com/package/@modelcontextprotocol/sdk) (MCP SDK)
+- Runtime Node.js-compatível: [Bun](https://bun.sh), [Node](https://nodejs.org) ou [Deno](https://deno.com)
+
+Seu server precisa:
+
+1. Declarar a capability `claude/channel` para que Claude Code registre um listener de notificações
+2. Emitir eventos `notifications/claude/channel` quando algo acontecer
+3. Conectar via [stdio transport](https://modelcontextprotocol.io/docs/concepts/transports#standard-io)
+
+## Exemplo: Webhook Receiver
+
+Um server single-file que escuta HTTP requests e encaminha para a sessão Claude Code.
+
+### 1. Criar o Projeto
+
+```bash
+mkdir webhook-channel && cd webhook-channel
+bun add @modelcontextprotocol/sdk
+```
+
+### 2. Escrever o Server
+
+```ts
+// webhook.ts
+#!/usr/bin/env bun
+import { Server } from '@modelcontextprotocol/sdk/server/index.js'
+import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
+
+const mcp = new Server(
+  { name: 'webhook', version: '0.0.1' },
+  {
+    capabilities: { experimental: { 'claude/channel': {} } },
+    instructions: 'Events from the webhook channel arrive as <channel source="webhook" ...>. Read them and act, no reply expected.',
+  },
+)
+
+await mcp.connect(new StdioServerTransport())
+
+Bun.serve({
+  port: 8788,
+  hostname: '127.0.0.1',
+  async fetch(req) {
+    const body = await req.text()
+    await mcp.notification({
+      method: 'notifications/claude/channel',
+      params: {
+        content: body,
+        meta: { path: new URL(req.url).pathname, method: req.method },
+      },
+    })
+    return new Response('ok')
+  },
+})
+```
+
+### 3. Registrar no MCP Config
+
+```json
+// .mcp.json
+{
+  "mcpServers": {
+    "webhook": { "command": "bun", "args": ["./webhook.ts"] }
+  }
+}
+```
+
+### 4. Testar
+
+```bash
+# Terminal 1: iniciar Claude Code com flag de desenvolvimento
+claude --dangerously-load-development-channels server:webhook
+
+# Terminal 2: simular um webhook
+curl -X POST localhost:8788 -d "build failed on main: https://ci.example.com/run/1234"
+```
+
+O payload chega como:
+
+```
+<channel source="webhook" path="/" method="POST">build failed on main: https://ci.example.com/run/1234</channel>
+```
+
+## Server Options
+
+| Campo | Tipo | Descrição |
+|-------|------|-----------|
+| `capabilities.experimental['claude/channel']` | `object` | **Obrigatório.** Sempre `{}`. Registra o listener de notificações |
+| `capabilities.experimental['claude/channel/permission']` | `object` | Opcional. Declara que o channel pode receber permission relay |
+| `capabilities.tools` | `object` | Apenas bidirecional. Sempre `{}`. Habilita tool discovery |
+| `instructions` | `string` | Recomendado. Adicionado ao system prompt do Claude |
+
+## Notification Format
+
+Emitir `notifications/claude/channel` com dois params:
+
+| Campo | Tipo | Descrição |
+|-------|------|-----------|
+| `content` | `string` | O corpo do evento. Entregue como body da tag `<channel>` |
+| `meta` | `Record<string, string>` | Opcional. Cada entry vira um atributo na tag `<channel>` |
+
+```ts
+await mcp.notification({
+  method: 'notifications/claude/channel',
+  params: {
+    content: 'build failed on main',
+    meta: { severity: 'high', run_id: '1234' },
+  },
+})
+```
+
+Resultado no contexto do Claude:
+
+```
+<channel source="your-channel" severity="high" run_id="1234">
+build failed on main
+</channel>
+```
+
+**Nota sobre meta keys:** apenas letras, dígitos e underscores. Keys com hífens são silenciosamente descartadas.
+
+## Expose a Reply Tool (Bidirecional)
+
+Para channels bidirecionais (chat bridges), exponha um MCP tool padrão:
+
+```ts
+import { ListToolsRequestSchema, CallToolRequestSchema } from '@modelcontextprotocol/sdk/types.js'
+
+// Tool discovery
+mcp.setRequestHandler(ListToolsRequestSchema, async () => ({
+  tools: [{
+    name: 'reply',
+    description: 'Send a message back over this channel',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        chat_id: { type: 'string', description: 'The conversation to reply in' },
+        text: { type: 'string', description: 'The message to send' },
+      },
+      required: ['chat_id', 'text'],
+    },
+  }],
+}))
+
+// Tool handler
+mcp.setRequestHandler(CallToolRequestSchema, async req => {
+  if (req.params.name === 'reply') {
+    const { chat_id, text } = req.params.arguments as { chat_id: string; text: string }
+    // Enviar para a plataforma de chat
+    await sendToYourPlatform(chat_id, text)
+    return { content: [{ type: 'text', text: 'sent' }] }
+  }
+  throw new Error(`unknown tool: ${req.params.name}`)
+})
+```
+
+Atualize as `instructions` para que Claude saiba usar o tool:
+
+```ts
+instructions: 'Messages arrive as <channel source="..." chat_id="...">. Reply with the reply tool, passing the chat_id from the tag.'
+```
+
+## Gate Inbound Messages (Segurança)
+
+Um channel sem gate é um vetor de prompt injection. Sempre verifique o remetente contra uma allowlist **antes** de emitir:
+
+```ts
+const allowed = new Set(loadAllowlist())
+
+// No handler de mensagens:
+if (!allowed.has(message.from.id)) {
+  return  // descarte silenciosamente
+}
+await mcp.notification({ ... })
+```
+
+**Importante:** faça gate no ID do remetente (`message.from.id`), não no chat/room (`message.chat.id`). Em grupos, qualquer pessoa no room poderia injetar mensagens.
+
+## Permission Relay
+
+> Requer Claude Code v2.1.81+
+
+Channels bidirecionais podem encaminhar prompts de permissão para aprovação remota.
+
+### Como Funciona
+
+1. Claude Code gera um request ID e notifica seu server
+2. Seu server encaminha o prompt para o chat
+3. O usuário remoto responde com `yes <id>` ou `no <id>`
+4. Seu handler parseia a resposta e emite um verdict
+
+O dialog local do terminal permanece aberto — a primeira resposta (local ou remota) é aplicada.
+
+### Implementação
+
+**1. Declarar a capability:**
+
+```ts
+capabilities: {
+  experimental: {
+    'claude/channel': {},
+    'claude/channel/permission': {},  // opt-in para relay
+  },
+  tools: {},
+},
+```
+
+**2. Handler para incoming request:**
+
+```ts
+import { z } from 'zod'
+
+const PermissionRequestSchema = z.object({
+  method: z.literal('notifications/claude/channel/permission_request'),
+  params: z.object({
+    request_id: z.string(),
+    tool_name: z.string(),
+    description: z.string(),
+    input_preview: z.string(),
+  }),
+})
+
+mcp.setNotificationHandler(PermissionRequestSchema, async ({ params }) => {
+  send(
+    `Claude wants to run ${params.tool_name}: ${params.description}\n\n` +
+    `Reply "yes ${params.request_id}" or "no ${params.request_id}"`,
+  )
+})
+```
+
+**3. Interceptar verdict no inbound handler:**
+
+```ts
+const PERMISSION_REPLY_RE = /^\s*(y|yes|n|no)\s+([a-km-z]{5})\s*$/i
+
+// No handler de mensagens inbound:
+const m = PERMISSION_REPLY_RE.exec(message.text)
+if (m) {
+  await mcp.notification({
+    method: 'notifications/claude/channel/permission',
+    params: {
+      request_id: m[2].toLowerCase(),
+      behavior: m[1].toLowerCase().startsWith('y') ? 'allow' : 'deny',
+    },
+  })
+  return  // não encaminhe como chat
+}
+```
+
+### Permission Request Fields
+
+| Campo | Descrição |
+|-------|-----------|
+| `request_id` | 5 letras minúsculas (sem `l`). Inclua no prompt para ser ecoado na resposta |
+| `tool_name` | Nome do tool (ex: `Bash`, `Write`) |
+| `description` | Resumo legível do que o tool call faz |
+| `input_preview` | Argumentos do tool como JSON, truncado em 200 chars |
+
+## Empacotar como Plugin
+
+Para tornar seu channel instalável e compartilhável:
+
+1. Empacote como [plugin](https://code.claude.com/docs/en/plugins)
+2. Publique em um [marketplace](https://code.claude.com/docs/en/plugin-marketplaces)
+3. Usuários instalam com `/plugin install` e habilitam com `--channels plugin:<name>@<marketplace>`
+
+Channels publicados em marketplaces próprios ainda precisam de `--dangerously-load-development-channels` até serem adicionados à allowlist oficial ou à `allowedChannelPlugins` da organização.
+
+## Testar Durante o Research Preview
+
+Custom channels não estão na allowlist aprovada. Use a flag de desenvolvimento:
+
+```bash
+# Plugin em desenvolvimento
+claude --dangerously-load-development-channels plugin:yourplugin@yourmarketplace
+
+# Server direto do .mcp.json
+claude --dangerously-load-development-channels server:webhook
+```
+
+O bypass é por-entry. A policy `channelsEnabled` da organização ainda se aplica.
+
+## Referências
+
+- [Guia de Channels](channels.md) — setup dos channels oficiais (Telegram, Discord, iMessage)
+- [Implementações funcionais](https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins) — código completo com pairing, reply tools e file attachments
+- [MCP](https://modelcontextprotocol.io) — protocolo base que channel servers implementam
+
+
+---
+
+# Channels — Comunicação Bidirecional com Claude Code
+
+Channels permitem enviar mensagens para uma sessão Claude Code em execução e receber respostas de volta — como uma ponte de chat entre plataformas externas e o seu terminal.
+
+> **Channels vs Integrações:** Integrações (API clients, MCP servers) são ferramentas que Claude chama sob demanda durante uma tarefa. Channels são o inverso: sistemas externos que **empurram** eventos para dentro da sessão. Você pode ter ambos — por exemplo, Discord como integração (community monitoring via @pulse) E como channel (chat bidirecional com Claude).
+
+## Channels Disponíveis
+
+| Channel | Plataforma | Tipo | Make Command |
+|---------|-----------|------|-------------|
+| **Telegram** | Mobile/Desktop | Bot (polling) | `make telegram` |
+| **Discord** | Desktop/Mobile | Bot (gateway) | `make discord-channel` |
+| **iMessage** | macOS only | Nativo (Messages.app) | `make imessage` |
+
+## Pré-requisitos
+
+- **Claude Code v2.1.80+** (verificar com `claude --version`)
+- **Bun** instalado (verificar com `bun --version`, instalar em [bun.sh](https://bun.sh))
+- **Login via claude.ai** (Console e API key não suportam channels)
+- **Plugin marketplace** configurado: `/plugin marketplace add anthropics/claude-plugins-official`
+
+## Setup: Telegram
+
+O Telegram já está configurado neste workspace. Documentação completa em [docs/integrations/telegram.md](../integrations/telegram.md).
+
+### 1. Criar um Bot
+
+1. Abra o Telegram e envie mensagem para [@BotFather](https://t.me/BotFather)
+2. Envie `/newbot` e siga as instruções
+3. Copie o **Bot Token** fornecido
+
+### 2. Instalar o Plugin
+
+No Claude Code:
+
+```
+/plugin install telegram@claude-plugins-official
+```
+
+Se o plugin não for encontrado, atualize o marketplace:
+
+```
+/plugin marketplace update claude-plugins-official
+```
+
+Depois recarregue:
+
+```
+/reload-plugins
+```
+
+### 3. Configurar o Token
+
+```
+/telegram:configure <seu_token>
+```
+
+Isso salva em `~/.claude/channels/telegram/.env`. Alternativamente, defina `TELEGRAM_BOT_TOKEN` no ambiente do shell.
+
+### 4. Iniciar o Channel
+
+**Manual (foreground):**
+
+```bash
+claude --channels plugin:telegram@claude-plugins-official
+```
+
+**Background (recomendado):**
+
+```bash
+make telegram
+```
+
+Isso inicia o bot em uma sessão `screen` em background com `--dangerously-skip-permissions`.
+
+### 5. Parear sua Conta
+
+1. No Telegram, envie qualquer mensagem para o seu bot
+2. O bot responde com um **código de pareamento**
+3. No Claude Code, execute:
+
+```
+/telegram:access pair <código>
+```
+
+4. Restrinja o acesso apenas à sua conta:
+
+```
+/telegram:access policy allowlist
+```
+
+### Gerenciar
+
+| Comando | O que faz |
+|---------|----------|
+| `make telegram` | Iniciar bot em background |
+| `make telegram-stop` | Parar o bot |
+| `make telegram-attach` | Conectar ao terminal (Ctrl+A D para desconectar) |
+
+---
+
+## Setup: Discord Channel
+
+> **Nota:** Este é o Discord **Channel** (chat bidirecional com Claude Code), diferente da integração Discord API usada pelo @pulse para community monitoring. São independentes e podem coexistir.
+
+### 1. Criar um Bot Discord
+
+1. Acesse o [Discord Developer Portal](https://discord.com/developers/applications)
+2. Clique em **New Application** e dê um nome
+3. Na seção **Bot**, clique em **Reset Token** e copie o token
+
+### 2. Habilitar Message Content Intent
+
+Nas configurações do bot, em **Privileged Gateway Intents**, habilite:
+
+- **Message Content Intent** (obrigatório)
+
+### 3. Convidar o Bot para o Servidor
+
+Vá em **OAuth2 > URL Generator**. Selecione o scope `bot` e habilite estas permissões:
+
+- View Channels
+- Send Messages
+- Send Messages in Threads
+- Read Message History
+- Attach Files
+- Add Reactions
+
+Abra a URL gerada para adicionar o bot ao seu servidor.
+
+### 4. Instalar o Plugin
+
+No Claude Code:
+
+```
+/plugin install discord@claude-plugins-official
+```
+
+Se não encontrar, atualize o marketplace:
+
+```
+/plugin marketplace update claude-plugins-official
+```
+
+Depois recarregue:
+
+```
+/reload-plugins
+```
+
+### 5. Configurar o Token
+
+```
+/discord:configure <seu_token>
+```
+
+Salva em `~/.claude/channels/discord/.env`. Alternativamente, defina `DISCORD_BOT_TOKEN` no ambiente.
+
+### 6. Iniciar o Channel
+
+**Manual (foreground):**
+
+```bash
+claude --channels plugin:discord@claude-plugins-official
+```
+
+**Background (recomendado):**
+
+```bash
+make discord-channel
+```
+
+### 7. Parear sua Conta
+
+1. Envie uma DM para o seu bot no Discord
+2. O bot responde com um **código de pareamento**
+3. No Claude Code:
+
+```
+/discord:access pair <código>
+```
+
+4. Restrinja o acesso:
+
+```
+/discord:access policy allowlist
+```
+
+### Gerenciar
+
+| Comando | O que faz |
+|---------|----------|
+| `make discord-channel` | Iniciar channel em background |
+| `make discord-channel-stop` | Parar o channel |
+| `make discord-channel-attach` | Conectar ao terminal (Ctrl+A D para desconectar) |
+
+---
+
+## Setup: iMessage
+
+> **Requisito:** macOS apenas. Lê o banco de dados do Messages.app diretamente e envia respostas via AppleScript. Não precisa de bot token nem serviço externo.
+
+### 1. Conceder Full Disk Access
+
+O banco do Messages (`~/Library/Messages/chat.db`) é protegido pelo macOS. Na primeira leitura, o macOS solicita permissão — clique em **Allow**.
+
+Se o prompt não aparecer ou você clicou em "Don't Allow", conceda manualmente:
+
+**System Settings > Privacy & Security > Full Disk Access** → adicione seu terminal (Terminal, iTerm, etc.)
+
+### 2. Instalar o Plugin
+
+No Claude Code:
+
+```
+/plugin install imessage@claude-plugins-official
+```
+
+Se não encontrar:
+
+```
+/plugin marketplace update claude-plugins-official
+```
+
+### 3. Iniciar o Channel
+
+**Manual (foreground):**
+
+```bash
+claude --channels plugin:imessage@claude-plugins-official
+```
+
+**Background (recomendado):**
+
+```bash
+make imessage
+```
+
+### 4. Testar — Envie uma Mensagem para Si Mesmo
+
+Abra o Messages em qualquer dispositivo com seu Apple ID e envie uma mensagem **para si mesmo**. Self-chat funciona automaticamente sem configuração de acesso.
+
+> Na primeira resposta do Claude, o macOS pede permissão de Automação para o terminal controlar o Messages. Clique **OK**.
+
+### 5. Permitir Outros Remetentes
+
+Por padrão, apenas suas próprias mensagens passam. Para permitir outro contato:
+
+```
+/imessage:access allow +5531999999999
+```
+
+Handles aceitos: números com código do país (`+55...`) ou emails Apple ID.
+
+### Gerenciar
+
+| Comando | O que faz |
+|---------|----------|
+| `make imessage` | Iniciar channel em background |
+| `make imessage-stop` | Parar o channel |
+| `make imessage-attach` | Conectar ao terminal (Ctrl+A D para desconectar) |
+
+---
+
+## Múltiplos Channels
+
+Você pode rodar vários channels simultaneamente. Cada um roda em sua própria sessão `screen`:
+
+```bash
+make telegram
+make discord-channel
+make imessage
+```
+
+Ou em uma única sessão Claude Code (foreground):
+
+```bash
+claude --channels plugin:telegram@claude-plugins-official plugin:discord@claude-plugins-official plugin:imessage@claude-plugins-official
+```
+
+## Segurança
+
+- Cada channel mantém uma **allowlist de remetentes** — apenas IDs aprovados podem enviar mensagens
+- Telegram e Discord usam **pairing**: o remetente envia uma mensagem, recebe um código, e você aprova no Claude Code
+- iMessage permite self-chat automaticamente; outros contatos são adicionados por handle
+- **Permission relay**: channels bidirecionais podem encaminhar prompts de permissão para que você aprove/negue remotamente (ex: aprovar um `Bash` command pelo Telegram)
+- Estar no `.mcp.json` não é suficiente — o server também precisa ser nomeado em `--channels`
+
+## Enterprise / Team
+
+Em planos Team e Enterprise, channels são **desabilitados por padrão**. O admin controla via:
+
+| Setting | Função |
+|---------|--------|
+| `channelsEnabled` | Switch master. Deve ser `true` para qualquer channel funcionar |
+| `allowedChannelPlugins` | Quais plugins podem registrar como channel (substitui a lista padrão da Anthropic) |
+
+Configurar em: **claude.ai > Admin settings > Claude Code > Channels**
+
+## Channels Customizados
+
+Você pode construir seus próprios channels para sistemas que não têm plugin ainda (CI/CD, monitoring, webhooks). Veja o [Channels Reference](channels-reference.md) para a documentação técnica completa.
+
+## Troubleshooting
+
+**Bot não responde no Telegram/Discord:**
+- Verifique se o Claude Code está rodando com `--channels` (ou via `make telegram` / `make discord-channel`)
+- Use `make telegram-attach` ou `make discord-channel-attach` para ver o terminal
+
+**"Plugin not found":**
+- Execute `/plugin marketplace update claude-plugins-official`
+- Depois `/reload-plugins`
+
+**"Blocked by org policy":**
+- Admin precisa habilitar `channelsEnabled` nas managed settings
+
+**iMessage — "authorization denied":**
+- Conceda Full Disk Access ao terminal em System Settings > Privacy & Security
+
+**Mensagens não chegam:**
+- Confirme que fez o pairing (`/telegram:access pair`, `/discord:access pair`)
+- Confirme que a policy é allowlist (`/telegram:access policy allowlist`)
+
+**Permission prompts travam a sessão:**
+- Channels com permission relay encaminham os prompts. Responda pelo chat ou no terminal local
+- Para uso autônomo: `--dangerously-skip-permissions` (apenas em ambientes confiáveis)
 
 
 ---
@@ -1782,6 +3249,8 @@ You don't have to use slash commands. Claude reads your intent and picks the rig
 # Discord Integration
 
 Discord integration enables community monitoring, message retrieval, channel management, and automated pulse reports via the @pulse agent.
+
+> **Discord Channel vs Discord API:** This page covers the Discord **API integration** used by @pulse for community monitoring (reading messages, sending announcements, managing channels). There is also a Discord **Channel** — a bidirectional chat bridge that pushes DMs into your Claude Code session. They are independent and can coexist. See the [Channels Guide](../guides/channels.md#setup-discord-channel) for channel setup.
 
 ## Setup
 
@@ -2835,6 +4304,20 @@ OpenClaude connects to external services through three mechanisms: **MCP servers
 
 ![Integrations overview](../imgs/doc-integrations.png)
 
+## Channels (Bidirectional)
+
+Channels are a different kind of integration: external systems **push** events into your running Claude Code session, and Claude can reply back through the same channel. Unlike API clients (which Claude calls on-demand) or MCP servers (which expose tools), channels deliver messages in real time.
+
+| Channel | Platform | Make Command | Guide |
+|---------|----------|-------------|-------|
+| Telegram | Mobile/Desktop | `make telegram` | [Setup](../guides/channels.md#setup-telegram) |
+| Discord | Desktop/Mobile | `make discord-channel` | [Setup](../guides/channels.md#setup-discord-channel) |
+| iMessage | macOS only | `make imessage` | [Setup](../guides/channels.md#setup-imessage) |
+
+> **Note:** The Discord channel (bidirectional chat with Claude Code) is separate from the Discord API integration (community monitoring via @pulse). Both can coexist.
+
+Full guide: [Channels](../guides/channels.md) | Technical reference: [Channels Reference](../guides/channels-reference.md)
+
 ## Integration Types
 
 ### MCP Servers
@@ -3070,6 +4553,8 @@ Claude uses the `int-stripe` skill to call the Stripe API and return formatted r
 # Telegram Integration
 
 Telegram provides real-time messaging and notifications via a bot connected through MCP. The @clawdia agent uses it to send alerts, receive commands, and communicate with the user on the go.
+
+> **Channel mode:** Telegram also works as a [Channel](../guides/channels.md#setup-telegram) — a bidirectional chat bridge that pushes messages into your Claude Code session. Start with `make telegram`. See the [Channels Guide](../guides/channels.md) for full setup including pairing and security.
 
 ## Setup
 
@@ -3922,14 +5407,28 @@ Any script in `ADWs/routines/` or `ADWs/routines/custom/` is automatically disco
 make daily           # Runs: sync + review (sync meetings then organize tasks)
 ```
 
-## Servers
+## Servers & Channels
 
 ```bash
-make scheduler       # Start the routine scheduler (runs in foreground)
-make telegram        # Start Telegram bot in background (screen session)
-make telegram-stop   # Stop the Telegram bot
-make telegram-attach # Attach to Telegram terminal (Ctrl+A D to detach)
+make scheduler              # Start the routine scheduler (runs in foreground)
+
+# Telegram channel
+make telegram               # Start Telegram bot in background (screen session)
+make telegram-stop          # Stop the Telegram bot
+make telegram-attach        # Attach to Telegram terminal (Ctrl+A D to detach)
+
+# Discord channel (chat bidirecional, diferente da integração API do @pulse)
+make discord-channel        # Start Discord channel in background (screen session)
+make discord-channel-stop   # Stop the Discord channel
+make discord-channel-attach # Attach to Discord channel terminal (Ctrl+A D to detach)
+
+# iMessage channel (macOS only)
+make imessage               # Start iMessage channel in background (screen session)
+make imessage-stop          # Stop the iMessage channel
+make imessage-attach        # Attach to iMessage terminal (Ctrl+A D to detach)
 ```
+
+See [Channels Guide](../guides/channels.md) for full setup instructions.
 
 ## Observability
 
@@ -3950,6 +5449,16 @@ make docker-down       # Stop all containers
 make docker-logs       # Show container logs (follow mode)
 make docker-run ADW=good_morning.py  # Run a specific routine in Docker
 make docker-build      # Build the Docker image
+```
+
+## Agent Teams (Experimental)
+
+Parallel multi-agent versions of consolidation routines. Higher token cost (~3-5x), faster execution.
+
+```bash
+make team-strategy   # Strategy digest via agent team (@sage leads, @atlas/@flux/@pulse/@pixel)
+make team-dashboard  # Dashboard via agent team (@clawdia leads, @atlas/@flux/@pulse/@dex)
+make team-weekly     # Weekly review via agent team (@clawdia leads, @atlas/@flux/@pulse)
 ```
 
 ## Help
@@ -4683,6 +6192,34 @@ For actions that should run **once** at a specific time (not recurring), use **S
 "Post no LinkedIn sexta 10h" → scheduled task (one-off)
 "Check community every day at 20h" → routine (recurring)
 ```
+
+## Agent Teams (Experimental, Opt-in)
+
+Parallel multi-agent versions of consolidation routines. Instead of one agent collecting data sequentially, Agent Teams spawn domain-specific teammates that work in parallel — each in their own context window.
+
+**Trade-off:** ~3-5x higher token cost, but faster execution and each agent uses its own domain expertise.
+
+| Target | Normal equivalent | Lead | Teammates |
+|--------|------------------|------|-----------|
+| `make team-strategy` | `make run R=strategy-digest` | @sage | @atlas, @flux, @pulse, @pixel |
+| `make team-dashboard` | `make run R=dashboard` | @clawdia | @atlas, @flux, @pulse, @dex |
+| `make team-weekly` | `make run R=weekly-review` | @clawdia | @atlas, @flux, @pulse |
+
+Scripts live in `ADWs/routines/teams/`. These are **never scheduled** — run manually when you want speed or richer cross-domain analysis.
+
+Requires the experimental flag (already enabled in `.claude/settings.json`):
+
+```json
+{ "env": { "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1" } }
+```
+
+How it works:
+1. The lead agent (e.g., @sage) creates an agent team
+2. Each teammate is spawned using the corresponding agent type (e.g., `atlas-project`)
+3. Teammates collect domain data in parallel
+4. The lead waits for all teammates, then synthesizes findings into the final output
+
+Metrics for team runs appear as `team-strategy-digest`, `team-dashboard`, etc. in `metrics.json`, separate from normal runs — making it easy to compare cost and speed.
 
 ## Logs and Metrics
 

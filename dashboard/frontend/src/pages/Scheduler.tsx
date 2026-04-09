@@ -128,61 +128,73 @@ export default function Scheduler() {
         </button>
       </div>
 
-      {/* Local Services */}
-      <h2 className="text-base font-semibold text-[#e6edf3] mb-3">Background Services</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-10">
-        {services.filter(s => !(s as any).category).map((svc) => (
-          <div key={svc.name} className="bg-[#161b22] border border-[#21262d] rounded-xl p-5 hover:border-[#00FFA7]/30 transition-all">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2.5">
-                <StatusDot status={svc.running ? 'ok' : 'error'} />
-                <h3 className="font-semibold text-[#e6edf3] text-sm">{svc.name}</h3>
-              </div>
-              <span className={`inline-flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-0.5 rounded-full ${
-                svc.running
-                  ? 'bg-[#00FFA7]/10 text-[#00FFA7] border border-[#00FFA7]/20'
-                  : 'bg-red-500/10 text-red-400 border border-red-500/20'
-              }`}>
-                <span className={`w-1.5 h-1.5 rounded-full ${svc.running ? 'bg-[#00FFA7] animate-pulse' : 'bg-red-400'}`} />
-                {svc.running ? 'Running' : 'Stopped'}
-              </span>
-            </div>
-            <p className="text-xs text-[#667085] mb-4">{svc.description}</p>
-            <div className="flex items-center justify-between gap-2">
-              <code className="text-[11px] text-[#e6edf3] bg-[#0d1117] border border-[#21262d] px-2 py-1 rounded font-mono truncate">{svc.command}</code>
-              <div className="flex items-center gap-2 shrink-0">
-                {svc.running && svc.id !== 'dashboard' && (
-                  <button
-                    onClick={() => openTerminal(svc.id)}
-                    className="flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-lg border border-[#21262d] bg-[#0d1117] text-[#667085] hover:text-[#00FFA7] hover:border-[#00FFA7]/30 transition-colors"
-                  >
-                    <Terminal size={12} /> Logs
-                  </button>
-                )}
-              {svc.id !== 'dashboard' && svc.id !== 'scheduler' && (
-                <button
-                  onClick={() => handleAction(svc.id, svc.running ? 'stop' : 'start')}
-                  disabled={actionLoading === svc.id}
-                  className={`flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-lg border transition-colors ${
-                    svc.running
-                      ? 'bg-red-500/10 text-red-400 hover:bg-red-500/20 border-red-500/20'
-                      : 'bg-[#00FFA7]/10 text-[#00FFA7] hover:bg-[#00FFA7]/20 border-[#00FFA7]/20'
-                  } ${actionLoading === svc.id ? 'opacity-50' : ''}`}
-                >
-                  {actionLoading === svc.id ? (
-                    <RefreshCw size={12} className="animate-spin" />
-                  ) : svc.running ? (
-                    <><Square size={12} /> Stop</>
-                  ) : (
-                    <><Play size={12} /> Start</>
-                  )}
-                </button>
-              )}
-              </div>
+      {/* Service Card renderer */}
+      {(['service', 'channel'] as const).map((section) => {
+        const sectionServices = section === 'service'
+          ? services.filter(s => !(s as any).category)
+          : services.filter(s => (s as any).category === 'channel')
+        if (sectionServices.length === 0) return null
+        return (
+          <div key={section}>
+            <h2 className="text-base font-semibold text-[#e6edf3] mb-3">
+              {section === 'service' ? 'Background Services' : 'Channels'}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
+              {sectionServices.map((svc) => (
+                <div key={svc.name} className="bg-[#161b22] border border-[#21262d] rounded-xl p-5 hover:border-[#00FFA7]/30 transition-all">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-2.5">
+                      <StatusDot status={svc.running ? 'ok' : 'error'} />
+                      <h3 className="font-semibold text-[#e6edf3] text-sm">{svc.name}</h3>
+                    </div>
+                    <span className={`inline-flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-0.5 rounded-full ${
+                      svc.running
+                        ? 'bg-[#00FFA7]/10 text-[#00FFA7] border border-[#00FFA7]/20'
+                        : 'bg-red-500/10 text-red-400 border border-red-500/20'
+                    }`}>
+                      <span className={`w-1.5 h-1.5 rounded-full ${svc.running ? 'bg-[#00FFA7] animate-pulse' : 'bg-red-400'}`} />
+                      {svc.running ? 'Running' : 'Stopped'}
+                    </span>
+                  </div>
+                  <p className="text-xs text-[#667085] mb-4">{svc.description}</p>
+                  <div className="flex items-center justify-between gap-2">
+                    <code className="text-[11px] text-[#e6edf3] bg-[#0d1117] border border-[#21262d] px-2 py-1 rounded font-mono truncate">{svc.command}</code>
+                    <div className="flex items-center gap-2 shrink-0">
+                      {svc.running && svc.id !== 'dashboard' && (
+                        <button
+                          onClick={() => openTerminal(svc.id)}
+                          className="flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-lg border border-[#21262d] bg-[#0d1117] text-[#667085] hover:text-[#00FFA7] hover:border-[#00FFA7]/30 transition-colors"
+                        >
+                          <Terminal size={12} /> Logs
+                        </button>
+                      )}
+                      {svc.id !== 'dashboard' && svc.id !== 'scheduler' && (
+                        <button
+                          onClick={() => handleAction(svc.id, svc.running ? 'stop' : 'start')}
+                          disabled={actionLoading === svc.id}
+                          className={`flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-lg border transition-colors ${
+                            svc.running
+                              ? 'bg-red-500/10 text-red-400 hover:bg-red-500/20 border-red-500/20'
+                              : 'bg-[#00FFA7]/10 text-[#00FFA7] hover:bg-[#00FFA7]/20 border-[#00FFA7]/20'
+                          } ${actionLoading === svc.id ? 'opacity-50' : ''}`}
+                        >
+                          {actionLoading === svc.id ? (
+                            <RefreshCw size={12} className="animate-spin" />
+                          ) : svc.running ? (
+                            <><Square size={12} /> Stop</>
+                          ) : (
+                            <><Play size={12} /> Start</>
+                          )}
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        ))}
-      </div>
+        )
+      })}
 
       {/* Terminal Viewer */}
       {terminalService && (

@@ -27,6 +27,13 @@ Each agent has a corresponding command in `.claude/commands/`:
 /nex        — Sales: pipeline, proposals, qualification
 /mentor     — Courses: learning paths, modules
 /kai        — Personal: health, habits, routine
+/oracle     — Workspace knowledge: docs, how-to, configuration
+/mako       — Marketing: campaigns, SEO, email, brand
+/aria       — HR / People: recruiting, onboarding, performance
+/zara       — Customer Success: triage, escalation, KB
+/lex        — Legal / Compliance: contracts, NDA, LGPD
+/nova       — Product: specs, roadmaps, metrics, research
+/dex        — Data / BI: analysis, SQL, dashboards
 ```
 
 Usage in Claude Code:
@@ -88,20 +95,26 @@ To create a custom agent, use the `create-agent` skill or see [Creating Agents](
 .claude/agent-memory/custom-devops/  # Persistent memory
 ```
 
-## All 10 Core Agents
+## All 16 Core Agents
 
-| Agent | File | Command | Domain | Color |
-|-------|------|---------|--------|-------|
-| **Clawdia** | `clawdia-assistant.md` | `/clawdia` | Ops: agenda, emails, tasks, meetings, decisions | cyan |
-| **Flux** | `flux-finance.md` | `/flux` | Finance: Stripe, Omie, cash flow, monthly close | orange |
-| **Atlas** | `atlas-project.md` | `/atlas` | Projects: Linear, GitHub, sprints, licensing | - |
-| **Pulse** | `pulse-community.md` | `/pulse` | Community: Discord, WhatsApp, sentiment, FAQ | blue |
-| **Pixel** | `pixel-social-media.md` | `/pixel` | Social: content, calendar, cross-platform analytics | - |
-| **Sage** | `sage-strategy.md` | `/sage` | Strategy: OKRs, roadmap, competitive analysis | orange |
-| **Nex** | `nex-sales.md` | `/nex` | Sales: pipeline, proposals, qualification | - |
-| **Mentor** | `mentor-courses.md` | `/mentor` | Courses: learning paths, modules, academy | - |
-| **Kai** | `kai-personal-assistant.md` | `/kai` | Personal: health, habits, routine (isolated) | blue |
-| **Oracle** | `oracle.md` | `/oracle` | Workspace knowledge: docs, how-to, configuration | amber |
+| Agent | Command | Domain | Color |
+|-------|---------|--------|-------|
+| [**Clawdia**](clawdia.md) | `/clawdia` | Ops: agenda, emails, tasks, meetings, decisions | cyan |
+| [**Flux**](flux.md) | `/flux` | Finance: Stripe, Omie, cash flow, monthly close | orange |
+| [**Atlas**](atlas.md) | `/atlas` | Projects: Linear, GitHub, sprints, licensing | green |
+| [**Pulse**](pulse.md) | `/pulse` | Community: Discord, WhatsApp, sentiment, FAQ | blue |
+| [**Pixel**](pixel.md) | `/pixel` | Social: content, calendar, cross-platform analytics | yellow |
+| [**Sage**](sage.md) | `/sage` | Strategy: OKRs, roadmap, competitive analysis | orange |
+| [**Nex**](nex.md) | `/nex` | Sales: pipeline, proposals, qualification | red |
+| [**Mentor**](mentor.md) | `/mentor` | Courses: learning paths, modules, academy | purple |
+| [**Kai**](kai.md) | `/kai` | Personal: health, habits, routine (isolated) | blue |
+| [**Oracle**](oracle.md) | `/oracle` | Workspace knowledge: docs, how-to, configuration | amber |
+| [**Mako**](mako.md) | `/mako` | Marketing: campaigns, SEO, email sequences, brand | orange |
+| [**Aria**](aria.md) | `/aria` | HR / People: recruiting, onboarding, performance | pink |
+| [**Zara**](zara.md) | `/zara` | Customer Success: triage, escalation, health scores | cyan |
+| [**Lex**](lex.md) | `/lex` | Legal / Compliance: contracts, NDA, LGPD, risk | purple |
+| [**Nova**](nova.md) | `/nova` | Product: specs, roadmaps, metrics, research | blue |
+| [**Dex**](dex.md) | `/dex` | Data / BI: analysis, SQL, dashboards, visualizations | yellow |
 
 ### Agent Roles in Detail
 
@@ -124,3 +137,44 @@ To create a custom agent, use the `create-agent` skill or see [Creating Agents](
 **Kai** is the personal assistant with an isolated domain. Health tracking, habits, personal appointments, and routines. It does not handle professional matters.
 
 **Oracle** is the workspace knowledge agent. It answers questions about how OpenClaude works — agents, skills, routines, integrations, dashboard, configuration, and architecture — by reading the actual documentation before responding. No RAG or vector DB needed.
+
+**Mako** handles marketing. Campaign planning, content creation, brand reviews, SEO audits, email sequences, and performance reports.
+
+**Aria** manages HR and People Operations. Recruiting pipeline, performance reviews, onboarding checklists, compensation analysis, and org planning.
+
+**Zara** handles customer success. Ticket triage, escalation packaging, customer research, draft responses, and knowledge base articles.
+
+**Lex** manages legal and compliance. Contract review, NDA triage, LGPD compliance checks, risk assessment, and legal briefs.
+
+**Nova** handles product management. Feature specs/PRDs, metrics reviews, roadmap updates, product brainstorming, and stakeholder updates.
+
+**Dex** is the data and BI agent. Data analysis, SQL queries, interactive dashboards, statistical analysis, and data validation.
+
+## Preloaded Skills
+
+Each agent has a `skills` field in its frontmatter that pre-loads domain-specific skills into the agent's context at startup. This means the agent doesn't need to discover or load skills during execution — they're immediately available.
+
+```yaml
+---
+name: "flux-finance"
+skills:
+  - fin-daily-pulse
+  - fin-weekly-report
+  - int-stripe
+  - int-omie
+---
+```
+
+## Agent Teams (Experimental)
+
+For consolidation tasks that span multiple domains (strategy digest, dashboard, weekly review), Agent Teams can run domain-specific agents in parallel. Each teammate collects data from their domain simultaneously, then the lead agent synthesizes results.
+
+Agent Teams are opt-in and cost ~3-5x more tokens. Run manually:
+
+```bash
+make team-strategy    # @sage leads, @atlas + @flux + @pulse + @pixel as teammates
+make team-dashboard   # @clawdia leads, @atlas + @flux + @pulse + @dex as teammates
+make team-weekly      # @clawdia leads, @atlas + @flux + @pulse as teammates
+```
+
+See [Routines Overview](../routines/overview.md) for details on Agent Teams.

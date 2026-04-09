@@ -27,7 +27,7 @@
 
 OpenClaude is an open source, **unofficial** toolkit compatible with [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and other LLM tooling. It is designed to integrate with Claude Code capabilities: native agents, skills, slash commands, MCP integrations, and the Claude CLI.
 
-It turns a single Claude Code installation into a team of 9 specialized agents — each with its own domain, skills, persistent memory, and automated routines. The result is a production system that runs daily operations for a founder/CEO: from morning briefings to financial reports, community monitoring, social analytics, and end-of-day consolidation.
+It turns a single Claude Code installation into a team of 16 specialized agents — each with its own domain, skills, persistent memory, and automated routines. The result is a production system that runs daily operations for a founder/CEO: from morning briefings to financial reports, community monitoring, social analytics, and end-of-day consolidation.
 
 **This is not a chatbot.** It is a real operating layer that runs routines, generates HTML reports, syncs meetings, triages emails, monitors community health, tracks financial metrics, and consolidates everything into a unified dashboard — all automated.
 
@@ -44,8 +44,8 @@ It turns a single Claude Code installation into a team of 9 specialized agents �
 
 ## Key Features
 
-- **10 Core Agents + Custom** — Ops, Finance, Projects, Community, Social, Strategy, Sales, Courses, Personal, Knowledge — plus user-created `custom-*` agents (gitignored)
-- **~68 Skills** — organized by domain prefix (`social-`, `fin-`, `int-`, `prod-`, `mkt-`, `gog-`, `obs-`, `discord-`, `pulse-`, `sage-`)
+- **16 Core Agents + Custom** — Ops, Finance, Projects, Community, Social, Strategy, Sales, Courses, Personal, Knowledge, Marketing, HR, Customer Success, Legal, Product, Data — plus user-created `custom-*` agents (gitignored)
+- **~180 Skills** — organized by domain prefix (`social-`, `fin-`, `int-`, `prod-`, `mkt-`, `gog-`, `obs-`, `discord-`, `pulse-`, `sage-`, `hr-`, `legal-`, `ops-`, `cs-`, `data-`, `pm-`)
 - **7 Core + 20 Custom Routines** — daily, weekly, and monthly ADWs managed by a scheduler (core routines ship with the repo; custom routines are user-created and gitignored)
 - **Web Dashboard** — React + Flask app with auth, roles, web terminal, service management
 - **17 Integrations** — Google Calendar, Gmail, Linear, GitHub, Discord, Telegram, Stripe, Omie, Fathom, Todoist, YouTube, Instagram, LinkedIn, Evolution API, Evolution Go, Evo CRM, and more
@@ -200,6 +200,12 @@ Open Claude Code in the project directory — it reads `CLAUDE.md` automatically
 /mentor        # Courses — learning paths, modules
 /kai           # Personal — health, habits, routine
 /oracle        # Knowledge — workspace docs, how-to, configuration
+/mako          # Marketing — campaigns, content, SEO, brand
+/aria          # HR — recruiting, onboarding, performance
+/zara          # Customer Success — triage, escalation, health
+/lex           # Legal — contracts, compliance, NDA, risk
+/nova          # Product — specs, roadmaps, metrics, research
+/dex           # Data / BI — analysis, SQL, dashboards
 
 # Or just describe what you need — Claude routes to the right agent
 ```
@@ -218,9 +224,9 @@ A full web UI at `http://localhost:8080`:
 | **Agents** | View agent definitions and system prompts |
 | **Routines** | Metrics per routine (runs, success rate, cost) + manual run |
 | **Tasks** | Schedule one-off actions (skill, prompt, script) at a specific date/time |
-| **Skills** | Browse all ~68 skills by category |
+| **Skills** | Browse all ~180 skills by category |
 | **Templates** | Preview HTML report templates |
-| **Services** | Start/stop scheduler, Telegram bot with live logs |
+| **Services** | Start/stop scheduler, channels (Telegram, Discord, iMessage) with live logs |
 | **Memory** | Browse agent and global memory files |
 | **Knowledge** | Semantic search via [MemPalace](https://github.com/milla-jovovich/mempalace) — index code, docs, and knowledge |
 | **Integrations** | Status of all connected services + OAuth setup |
@@ -253,6 +259,13 @@ Claude Code (orchestrator)
     +-- Nex       — sales: pipeline, proposals, qualification
     +-- Mentor    — courses: learning paths, modules
     +-- Kai       — personal: health, habits, routine (isolated domain)
+    +-- Oracle    — knowledge: workspace docs, how-to, configuration
+    +-- Mako      — marketing: campaigns, content, SEO, brand
+    +-- Aria      — HR: recruiting, onboarding, performance
+    +-- Zara      — customer success: triage, escalation, health
+    +-- Lex       — legal: contracts, compliance, NDA, risk
+    +-- Nova      — product: specs, roadmaps, metrics, research
+    +-- Dex       — data/BI: analysis, SQL, dashboards
 ```
 
 Each agent has:
@@ -268,9 +281,9 @@ Each agent has:
 ```
 open-claude/
 ├── .claude/
-│   ├── agents/          — 9 agent system prompts
-│   ├── commands/        — 9 slash commands
-│   ├── skills/          — ~68 skills by prefix
+│   ├── agents/          — 16 agent system prompts
+│   ├── commands/        — 16 slash commands
+│   ├── skills/          — ~180 skills by prefix
 │   └── templates/html/  — 2 core + custom HTML templates
 ├── ADWs/
 │   ├── runner.py        — execution engine (logs + metrics + notifications)
