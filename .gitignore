@@ -99,3 +99,4 @@ site/pnpm-lock.yaml
 site/pnpm-workspace.yaml
 site/replit.md
 site/lib/mempalace.yaml
+entities.json
