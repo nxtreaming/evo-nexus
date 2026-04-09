@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2026-04-09
+
+### Added
+- **CLI installer** — `npx @evoapi/open-claude` clones repo, checks prerequisites, installs deps, runs setup wizard, and builds dashboard
+- **Version indicator in dashboard** — sidebar footer shows current version; `/api/version/check` compares against latest GitHub release with 1h cache
+- **Public roadmap** — `ROADMAP.md` with 4 phases (v0.4 → Future), community input via GitHub discussions
+- **Update guide** — `docs/guides/updating.md` with git pull, Docker, and custom content preservation instructions
+
+### Changed
+- **Privacy-first licensing** — removed heartbeat thread, deactivate endpoint, and shutdown hook. Only initial registration remains (who installed). No monitoring, no kill switch, no telemetry.
+- **Licensing version** — now reads from `pyproject.toml` dynamically instead of hardcoded constant
+
+### Fixed
+- **nginx 403 on `/docs/`** — removed `$uri/` from `try_files` so directory paths fall through to SPA instead of returning Forbidden
+- **`.gitignore` formatting** — `site/lib/` and `mempalace.yaml` were concatenated on one line
+- **User-specific files removed from git** — `mempalace.yaml` and `entities.json` no longer tracked
+
 ## [0.3.2] - 2026-04-08
 
 ### Added

@@ -1,11 +1,20 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import {
   LayoutDashboard, FileText, Bot, Clock, Zap, Layout, Calendar,
   Brain, Plug, DollarSign, Settings, FolderOpen, MessageSquare,
   Monitor, Users, ScrollText, LogOut, Menu, X, Shield, BookOpen, Library,
+  ArrowUpCircle,
 } from 'lucide-react'
+
+interface VersionInfo {
+  current: string
+  latest: string | null
+  update_available: boolean
+  release_url: string | null
+  release_notes: string | null
+}
 
 const navItems = [
   { to: '/chat', label: 'Chat', icon: MessageSquare, resource: 'chat', desktopOnly: true },
@@ -41,6 +50,14 @@ const roleBadgeClass: Record<string, string> = {
 export default function Sidebar() {
   const { user, logout, hasPermission } = useAuth()
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [versionInfo, setVersionInfo] = useState<VersionInfo | null>(null)
+
+  useEffect(() => {
+    fetch('/api/version/check')
+      .then((r) => r.json())
+      .then((data) => setVersionInfo(data))
+      .catch(() => {})
+  }, [])
 
   const visibleNav = navItems.filter(
     (item) => item.resource === null || hasPermission(item.resource, 'view')
@@ -115,6 +132,27 @@ export default function Sidebar() {
             >
               <LogOut size={16} />
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* Version indicator */}
+      {versionInfo && (
+        <div className="px-4 py-2 border-t border-[#344054]/50">
+          <div className="flex items-center justify-between text-[11px]">
+            <span className="text-[#667085]">v{versionInfo.current}</span>
+            {versionInfo.update_available && versionInfo.release_url && (
+              <a
+                href={versionInfo.release_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 text-[#00FFA7] hover:text-[#00FFA7]/80 transition-colors"
+                title={`Update available: v${versionInfo.latest}`}
+              >
+                <ArrowUpCircle size={12} />
+                <span>v{versionInfo.latest}</span>
+              </a>
+            )}
           </div>
         </div>
       )}

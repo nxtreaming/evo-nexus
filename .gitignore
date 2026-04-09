@@ -59,6 +59,7 @@ dashboard/frontend/dist/
 _evo/
 _evo-output/
 .claude/skills/evo-*/
+.claude/skills/release/
 
 # ── Python ────────────────────────────────
 .venv/

@@ -74,6 +74,8 @@ PUBLIC_PATHS = {
     "/api/auth/needs-setup",
     "/api/auth/setup",
     "/api/config/workspace-status",
+    "/api/version",
+    "/api/version/check",
 }
 
 @app.before_request
@@ -158,17 +160,74 @@ app.register_blueprint(twitter_auth_bp)
 app.register_blueprint(tiktok_auth_bp)
 app.register_blueprint(twitch_auth_bp)
 
-@app.route("/api/version")
-def api_version():
-    """Return current version from pyproject.toml."""
+def _get_local_version():
+    """Read current version from pyproject.toml."""
     try:
         pyproject = WORKSPACE / "pyproject.toml"
         for line in pyproject.read_text().splitlines():
             if line.startswith("version"):
-                return {"version": line.split('"')[1]}
+                return line.split('"')[1]
     except Exception:
         pass
-    return {"version": "unknown"}
+    return "unknown"
+
+
+@app.route("/api/version")
+def api_version():
+    """Return current version from pyproject.toml."""
+    return {"version": _get_local_version()}
+
+
+# --- Version check with 1h cache ---
+_version_cache = {"data": None, "expires": 0}
+
+@app.route("/api/version/check")
+def api_version_check():
+    """Compare local version against latest GitHub release (cached 1h)."""
+    import time
+    import requests as http_requests
+
+    now = time.time()
+    if _version_cache["data"] and now < _version_cache["expires"]:
+        return _version_cache["data"]
+
+    current = _get_local_version()
+    result = {
+        "current": current,
+        "latest": None,
+        "update_available": False,
+        "release_url": None,
+        "release_notes": None,
+    }
+
+    try:
+        resp = http_requests.get(
+            "https://api.github.com/repos/EvolutionAPI/open-claude/releases/latest",
+            timeout=10,
+            headers={"Accept": "application/vnd.github.v3+json"},
+        )
+        if resp.status_code == 200:
+            data = resp.json()
+            latest = data.get("tag_name", "").lstrip("v")
+            result["latest"] = latest
+            result["release_url"] = data.get("html_url")
+            result["release_notes"] = data.get("body", "")[:500]
+
+            # Compare versions (semver-like: major.minor.patch)
+            def parse_ver(v):
+                try:
+                    return tuple(int(x) for x in v.split("."))
+                except (ValueError, AttributeError):
+                    return (0, 0, 0)
+
+            if parse_ver(latest) > parse_ver(current):
+                result["update_available"] = True
+    except Exception:
+        pass
+
+    _version_cache["data"] = result
+    _version_cache["expires"] = now + 3600  # 1 hour
+    return result
 
 @app.route("/api/social-accounts")
 def social_accounts():
